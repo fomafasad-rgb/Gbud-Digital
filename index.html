@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>G.BUD Digital | Цифрова Гільдія Висотного Будівництва</title>
+    <title>G.BUD Digital | Висотний монтаж та фасадні роботи</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #FFD700; /* Золото Гільдії */
+            --primary: #FFD700;
             --bg: #0a0a0a;
             --card-bg: #1a1a1a;
             --text: #ffffff;
@@ -17,40 +17,36 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; overflow-x: hidden; }
 
-        /* Шапка */
         header { padding: 20px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; background: rgba(10,10,10,0.9); backdrop-filter: blur(10px); z-index: 1000; border-bottom: 1px solid #333; }
         .logo { font-weight: 900; font-size: 1.5rem; color: var(--primary); text-transform: uppercase; letter-spacing: 2px; }
 
-        /* Герой-секція */
-        .hero { height: 90vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px; background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1541888946425-d81bb19480c5?auto=format&fit=crop&q=80&w=2070') center/cover; }
-        .hero h1 { font-size: clamp(2.5rem, 8vw, 5rem); line-height: 1; margin-bottom: 20px; text-transform: uppercase; }
-        .hero p { font-size: 1.2rem; color: var(--primary); max-width: 600px; margin-bottom: 30px; font-weight: 700; }
-        .btn { padding: 15px 35px; background: var(--primary); color: #000; text-decoration: none; font-weight: 900; border-radius: 5px; text-transform: uppercase; transition: 0.3s; }
-        .btn:hover { transform: scale(1.05); box-shadow: 0 0 20px var(--primary); }
+        .hero { height: 80vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px; background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&q=80&w=2070') center/cover; }
+        .hero h1 { font-size: clamp(2rem, 7vw, 4rem); line-height: 1.1; margin-bottom: 20px; text-transform: uppercase; }
+        .hero p { font-size: 1.1rem; color: var(--gray); max-width: 700px; margin-bottom: 30px; }
+        .hero span { color: var(--primary); font-weight: bold; }
 
-        /* Секції */
-        section { padding: 80px 20px; max-width: 1200px; margin: 0 auto; }
-        h2 { font-size: 2.5rem; margin-bottom: 50px; text-align: center; text-transform: uppercase; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .btn { padding: 15px 35px; border: 2px solid var(--primary); color: var(--primary); text-decoration: none; font-weight: 700; border-radius: 5px; text-transform: uppercase; transition: 0.3s; }
+        .btn:hover { background: var(--primary); color: #000; }
 
-        /* Картки послуг */
-        .card { background: var(--card-bg); padding: 40px; border-radius: 15px; border: 1px solid #333; transition: 0.3s; position: relative; overflow: hidden; }
-        .card:hover { border-color: var(--primary); transform: translateY(-10px); }
-        .card h3 { color: var(--primary); margin-bottom: 15px; font-size: 1.5rem; }
-        .card .badge { position: absolute; top: 10px; right: 10px; font-size: 0.7rem; background: #333; padding: 5px 10px; border-radius: 5px; color: var(--primary); }
+        section { padding: 60px 20px; max-width: 1200px; margin: 0 auto; }
+        h2 { font-size: 2rem; margin-bottom: 40px; text-align: center; text-transform: uppercase; color: var(--primary); }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
 
-        /* Портфоліо / Висотки */
-        .objects { background: #111; padding: 50px 0; }
-        .object-item { display: flex; justify-content: space-between; padding: 20px; border-bottom: 1px solid #222; }
+        .card { background: var(--card-bg); padding: 30px; border-radius: 12px; border: 1px solid #222; transition: 0.3s; }
+        .card:hover { border-color: var(--primary); }
+        .card h3 { color: var(--primary); margin-bottom: 15px; font-size: 1.3rem; text-transform: uppercase; }
+
+        .objects { background: #111; padding: 40px 20px; border-radius: 15px; }
+        .object-item { display: flex; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid #222; }
         .object-item span:last-child { color: var(--primary); font-weight: bold; }
 
-        /* Футер */
-        footer { padding: 50px 20px; text-align: center; border-top: 1px solid #333; color: var(--gray); }
-        .contacts a { color: var(--text); text-decoration: none; display: block; margin: 10px 0; font-size: 1.2rem; }
+        footer { padding: 60px 20px; text-align: center; border-top: 1px solid #333; }
+        .contacts p { color: var(--gray); margin-bottom: 5px; }
+        .contacts a { color: var(--text); text-decoration: none; font-size: 1.2rem; font-weight: bold; transition: 0.2s; }
         .contacts a:hover { color: var(--primary); }
 
         @media (max-width: 768px) {
-            .hero h1 { font-size: 3rem; }
+            .hero h1 { font-size: 2.5rem; }
         }
     </style>
 </head>
@@ -62,49 +58,49 @@
 
     <main>
         <section class="hero">
-            <h1>Вершина <br>Надійності</h1>
-            <p>Цифрова Висотнє Будівництво 100+ метрів професійного досвіду.</p>
-            <a href="#contacts" class="btn">Обговорити об'єкт</a>
+            <h1>Надійність на Висоті</h1>
+            <p>Професійний монтаж фасадів та покрівлі. <span>100+ метрів</span> практичного досвіду та сучасний підхід до будівництва.</p>
+            <a href="#contacts" class="btn">Зв'язатися</a>
         </section>
 
         <section id="services">
-            <h2>Наші Потужності</h2>
+            <h2>Напрямки робіт</h2>
             <div class="grid">
                 <div class="card">
-                    <div class="badge">PRO</div>
-                    <p>Монтаж фасадів та скління на екстремальних висотах. BIM-супровід та цифрова точність кожного вузла.</p>
+                    <h3>Висотний монтаж</h3>
+                    <p>Монтаж фасадних систем та скління на екстремальних висотах. 100м+ досвіду робіт на знакових об'єктах.</p>
                 </div>
                 <div class="card">
-                    <div class="badge">TAPCO</div>
-                    <h3>ГібкоБуд</h3>
-                    <p>Виготовлення добірних елементів будь-якої складності. Відливи, козирки, планки з точністю до міліметра.</p>
+                    <h3>Покрівельні роботи</h3>
+                    <p>Якісний монтаж та обслуговування покрівель будь-якої складності. Гарантія надійності та герметичності.</p>
                 </div>
                 <div class="card">
-                    <div class="badge">SMART</div>
-                    <p>Впровадження цифрових технологій у будівництво. Розумні виміри та прозорий контроль якості.</p>
+                    <p>Виготовлення добірних елементів на верстаті Tapco. Відливи, козирки та планки з точністю до міліметра.</p>
+                </div>
+                <div class="card">
+                    <h3>Digital Контроль</h3>
+                    <p>Використання BIM-технологій та цифрових вимірів для максимальної точності на кожному етапі монтажу.</p>
                 </div>
             </div>
         </section>
 
-        <section class="objects">
-            <div class="object-item"><span></span><span>115 метрів</span></div>
-            <div class="object-item"><span></span></span><span>Фасадні роботи</span></div>
-            <div class="object-item"><span><span>Висотний монтаж</span></div>
-        </section>
-
         <section id="contacts">
-            <h2></h2>
-            <div class="contacts">
-                <p>З питань висотного монтажу:</p>
-                <a href="mailto:gbud.digital@gmail.com">gbud.digital@gmail.com</a>
-                <p>З питань металовиробів:</p>
-                <a href="mailto:gibkabud@gmail.com">gibkabud@gmail.com</a>
+            <h2>Контакти</h2>
+            <div class="grid">
+                <div class="contacts">
+                    <p>Висотний монтаж та фасади:</p>
+                    <a href="mailto:gbud.digital@gmail.com">gbud.digital@gmail.com</a>
+                </div>
+                <div class="contacts">
+                    <p>Замовлення:</p>
+                    <a href="mailto:gibkabud@gmail.com">gibkabud@gmail.com</a>
+                </div>
             </div>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2026 GBUD.Digital | Побудовано з надійністю</p>
+        <p>&copy; 2026 GBUD.Digital</p>
     </footer>
 
 </body>
