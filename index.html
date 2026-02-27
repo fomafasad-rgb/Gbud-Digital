@@ -30,20 +30,24 @@
             padding: 20px; 
             background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=2070') center/cover no-repeat; 
         }
-        .hero h1 { font-size: clamp(2rem, 7vw, 4.5rem); line-height: 1.1; margin-bottom: 20px; text-transform: uppercase; font-weight: 900; }
+        .hero h1 { font-size: clamp(2.5rem, 7vw, 4.5rem); line-height: 1.1; margin-bottom: 20px; text-transform: uppercase; font-weight: 900; }
         .hero p { font-size: 1.2rem; color: #ddd; max-width: 700px; margin-bottom: 30px; font-weight: 500; }
         .hero span { color: var(--primary); font-weight: bold; }
 
-        .btn { padding: 15px 35px; border: 2px solid var(--primary); color: var(--primary); text-decoration: none; font-weight: 700; border-radius: 5px; text-transform: uppercase; transition: 0.3s; letter-spacing: 1px; }
+        .btn { display: inline-block; padding: 15px 35px; border: 2px solid var(--primary); color: var(--primary); text-decoration: none; font-weight: 700; border-radius: 5px; text-transform: uppercase; transition: 0.3s; letter-spacing: 1px; cursor: pointer; background: transparent; }
         .btn:hover { background: var(--primary); color: #000; box-shadow: 0 0 15px rgba(255, 215, 0, 0.4); }
+        
+        /* Маленька кнопка для карток */
+        .btn-sm { padding: 10px 20px; font-size: 0.8rem; margin-top: 20px; }
 
         section { padding: 80px 20px; max-width: 1200px; margin: 0 auto; }
         h2 { font-size: 2rem; margin-bottom: 40px; text-align: center; text-transform: uppercase; color: var(--primary); letter-spacing: 1px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
 
-        .card { background: var(--card-bg); padding: 35px; border-radius: 12px; border: 1px solid #222; transition: 0.3s; }
+        .card { background: var(--card-bg); padding: 35px; border-radius: 12px; border: 1px solid #222; transition: 0.3s; display: flex; flex-direction: column; justify-content: space-between; }
         .card:hover { border-color: var(--primary); transform: translateY(-5px); }
         .card h3 { color: var(--primary); margin-bottom: 15px; font-size: 1.3rem; text-transform: uppercase; }
+        .card p { font-size: 0.95rem; color: #ccc; margin-bottom: 20px; }
 
         footer { padding: 60px 20px; text-align: center; border-top: 1px solid #333; margin-top: 40px; }
         .contacts { background: #111; padding: 30px; border-radius: 12px; text-align: center; border: 1px solid #222; max-width: 600px; margin: 0 auto; }
@@ -66,24 +70,43 @@
     <main>
         <section class="hero">
             <h1>Надійність на Висоті</h1>
-            <p>Професійний монтаж фасадів та покрівлі. <span>100+ метрів</span> практичного досвіду та сучасний підхід до будівництва.</p>
-            <a href="#contacts" class="btn">Зв'язатися</a>
+            <p>Фасади та покрівлі будь-якої складності. <span>100+ метрів</span> практичного досвіду та власний парк обладнання.</p>
+            <a href="#contacts" class="btn">Зв'язатися з майстром</a>
         </section>
 
         <section id="services">
             <h2>Напрямки робіт</h2>
             <div class="grid">
                 <div class="card">
-                    <h3>Висотний монтаж</h3>
-                    <p>Монтаж фасадних систем та скління на екстремальних висотах. Досвід робіт на об'єктах підвищеної складності.</p>
+                    <div>
+                        <h3>Висотний монтаж</h3>
+                        <p>Монтаж фасадних систем та скління на екстремальних висотах. Виправлення проектних помилок та індивідуальні вузли.</p>
+                    </div>
+                    <a href="fasadi.html" class="btn btn-sm">Детальніше</a>
                 </div>
+
                 <div class="card">
-                    <h3>Покрівельні роботи</h3>
-                    <p>Якісний монтаж та обслуговування покрівель. Гарантія надійності та абсолютної герметичності вузлів.</p>
+                    <div>
+                        <h3>Покрівельні роботи</h3>
+                        <p>Якісний монтаж та сервісне обслуговування. Гарантія абсолютної герметичності за рахунок власного гнуття металу.</p>
+                    </div>
+                    <a href="pokrivlya.html" class="btn btn-sm">Детальніше</a>
                 </div>
+
                 <div class="card">
-                    <h3>Digital Контроль</h3>
-                    <p>Використання сучасних технологій та цифрових вимірів для максимальної точності на кожному етапі.</p>
+                    <div>
+                        <h3>Власне виробництво</h3>
+                        <p>Гнуття металу на верстатах Tapco та Polish. Фрезерування композиту та виготовлення спецпланок під об'єкт.</p>
+                    </div>
+                    <a href="production.html" class="btn btn-sm">Детальніше</a>
+                </div>
+
+                <div class="card">
+                    <div>
+                        <h3>Digital Контроль</h3>
+                        <p>Моніторинг стану будівель та системний підхід до експлуатації через екосистему PropTech.</p>
+                    </div>
+                    <a href="https://proptech.com.ua" class="btn btn-sm" target="_blank">Перейти в Lab</a>
                 </div>
             </div>
         </section>
@@ -98,7 +121,7 @@
     </main>
 
     <footer>
-        <p>&copy; 2026 GBUD.Digital | Всі права захищено</p>
+        <p>&copy; 2026 GBUD.Digital | Частина екосистеми PropTech Ukraine</p>
     </footer>
 
 </body>
