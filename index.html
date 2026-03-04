@@ -35,7 +35,6 @@
         .hero span { color: var(--primary); font-weight: bold; }
 
         .btn { display: inline-block; padding: 15px 35px; border: 2px solid var(--primary); color: var(--primary); text-decoration: none; font-weight: 700; border-radius: 5px; text-transform: uppercase; transition: 0.3s; letter-spacing: 1px; cursor: pointer; background: transparent; }
-        .btn:hover { background: var(--primary); color: #000; box-shadow: 0 0 15px rgba(255, 215, 0, 0.4); }
         
         /* Маленька кнопка для карток */
         .btn-sm { padding: 10px 20px; font-size: 0.8rem; margin-top: 20px; }
@@ -45,15 +44,19 @@
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
 
         .card { background: var(--card-bg); padding: 35px; border-radius: 12px; border: 1px solid #222; transition: 0.3s; display: flex; flex-direction: column; justify-content: space-between; }
-        .card:hover { border-color: var(--primary); transform: translateY(-5px); }
         .card h3 { color: var(--primary); margin-bottom: 15px; font-size: 1.3rem; text-transform: uppercase; }
         .card p { font-size: 0.95rem; color: #ccc; margin-bottom: 20px; }
+
+        @media (hover: hover) {
+            .btn:hover { background: var(--primary); color: #000; box-shadow: 0 0 15px rgba(255, 215, 0, 0.4); }
+            .card:hover { border-color: var(--primary); transform: translateY(-5px); }
+            .contacts a:hover { color: var(--primary)>
+        .btn:active { background: var(--primary); color: #000; transform: scale(0.98); }
 
         footer { padding: 60px 20px; text-align: center; border-top: 1px solid #333; margin-top: 40px; }
         .contacts { background: #111; padding: 30px; border-radius: 12px; text-align: center; border: 1px solid #222; max-width: 600px; margin: 0 auto; }
         .contacts p { color: var(--gray); margin-bottom: 10px; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
         .contacts a { color: var(--text); text-decoration: none; font-size: 1.2rem; font-weight: bold; transition: 0.2s; }
-        .contacts a:hover { color: var(--primary); }
 
         @media (max-width: 768px) {
             .hero h1 { font-size: 2.8rem; }
@@ -96,22 +99,27 @@
                 <div class="card">
                     <div>
                         <h3>Виробництво</h3>
-                        <p>Гнуття листового металу.  Виготовлення спецпланок під об'єкт.</p>
+                        <p>Гнуття листового металу. Виготовлення спецпланок під об'єкт.</p>
                     </div>
                     <a href="production.html" class="btn btn-sm">Детальніше</a>
                 </div>
 
                 <div class="card">
-                    <div
-                        
-                     <div class="card">
+                    <div>
+                        <h3>Digital Контроль</h3>
+                        <p>Моніторинг стану будівель та системний підхід до експлуатації через екосистему PropTech.</p>
+                    </div>
+                    <a href="https://proptech.com.ua" class="btn btn-sm" target="_blank">Перейти в Lab</a>
+                </div>
+                
+                <div class="card">
                     <div>
                         <h3>Галерея робіт</h3>
                         <p>Фотографії з наших реальних об'єктів. Висотний монтаж, покрівельні роботи та виробництво.</p>
                     </div>
                     <a href="gallery.html" class="btn btn-sm" style="border-color: #FFD700; color: #FFD700;">Дивитися фото</a>
                 </div>
-
+            </div>
         </section>
 
         <section id="contacts">
@@ -129,3 +137,5 @@
 
 </body>
 </html>
+
+
