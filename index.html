@@ -4,18 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- Основні SEO мета-теги -->
-    <title>DigitalBud | Висотний монтаж та фасадні роботи</title>
-    <meta name="description" content="DigitalBud (gbud.digital) — професійний висотний монтаж, фасадні системи НВФ СПОК, покрівельні роботи будь-якої складності та власне виробництво виробів з металу.">
-    <meta name="keywords" content="DigitalBud, GBUD, висотний монтаж, фасадні роботи, НВФ, СПОК, покрівельні роботи, гнуття металу, виробництво спецпланок">
+    <!-- 1. ОСНОВНЕ SEO (ДЛЯ GOOGLE) -->
+    <title>DigitalBud | gbud.digital | Фасади та Висотний Монтаж</title>
+    <meta name="description" content="DigitalBud (gbud.digital) — професійний монтаж фасадних систем НВФ СПОК, покрівельні роботи та власне виробництво спецпланок GBUD. Точність та надійність на висоті.">
+    <meta name="keywords" content="DigitalBud, GBUD, монтаж фасадів, висотні роботи, покрівля київ, гнуття металу, нвф спок, дрони в будівництві">
     <meta name="author" content="gbud.digital">
-    <meta name="robots" content="index, follow">
 
-    <!-- Соціальні мережі (Open Graph) - для Telegram, Viber, Facebook -->
-    <meta property="og:title" content="DigitalBud | Надійність на висоті">
-    <meta property="og:description" content="Фасади та покрівлі будь-якої складності з практичним досвідом та індивідуальним підходом. Власне виробництво GBUD.">
-    <meta property="og:type" content="website">
+    <!-- 2. OPEN GRAPH (ДЛЯ VIBER, TELEGRAM, FACEBOOK) -->
+    <meta property="og:site_name" content="DigitalBud Systems">
+    <meta property="og:title" content="DigitalBud | Надійність на Висоті">
+    <meta property="og:description" content="Монтаж фасадів, покрівель та власне виробництво металевих виробів GBUD. Працюємо з цифровою точністю.">
     <meta property="og:url" content="https://digitalbud.com.ua">
+    <meta property="og:type" content="website">
+    <!-- Зображення, яке буде видно у Viber (хмарочос) -->
     <meta property="og:image" content="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=2070">
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
@@ -46,14 +47,9 @@
         }
         .hero h1 { font-size: clamp(2.5rem, 7vw, 4.5rem); line-height: 1.1; margin-bottom: 20px; text-transform: uppercase; font-weight: 900; }
         .hero p { font-size: 1.2rem; color: #ddd; max-width: 700px; margin-bottom: 30px; font-weight: 500; }
-        .hero span { color: var(--primary); font-weight: bold; }
 
         .btn { display: inline-block; padding: 15px 35px; border: 2px solid var(--primary); color: var(--primary); text-decoration: none; font-weight: 700; border-radius: 5px; text-transform: uppercase; transition: 0.3s; letter-spacing: 1px; cursor: pointer; background: transparent; }
-        
-        /* Маленька кнопка для карток */
         .btn-sm { padding: 10px 20px; font-size: 0.8rem; margin-top: 20px; }
-
-        /* Кнопка в шапці */
         .header-btn { padding: 8px 20px; border: 2px solid var(--primary); color: var(--primary); text-decoration: none; font-weight: 700; border-radius: 5px; text-transform: uppercase; font-size: 0.8rem; transition: 0.3s; letter-spacing: 1px; }
 
         section { padding: 80px 20px; max-width: 1200px; margin: 0 auto; }
@@ -61,27 +57,25 @@
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
 
         .card { background: var(--card-bg); padding: 35px; border-radius: 12px; border: 1px solid #222; transition: 0.3s; display: flex; flex-direction: column; justify-content: space-between; }
-        .card h3 { color: var(--primary); margin-bottom: 15px; font-size: 1.3rem; text-transform: uppercase; }
-        .card p { font-size: 0.95rem; color: #ccc; margin-bottom: 20px; }
-
-        /* ВИПРАВЛЕННЯ ДЛЯ ТЕЛЕФОНІВ: Hover працює ТІЛЬКИ на ПК */
+        
         @media (hover: hover) {
             .btn:hover, .header-btn:hover { background: var(--primary); color: #000; box-shadow: 0 0 15px rgba(255, 215, 0, 0.4); }
             .card:hover { border-color: var(--primary); transform: translateY(-5px); }
-            .contacts a:hover { color: var(--primary); }
         }
         
-        /* Просте підсвічування при дотику на телефоні */
         .btn:active, .header-btn:active { background: var(--primary); color: #000; transform: scale(0.98); }
+
+        .card h3 { color: var(--primary); margin-bottom: 15px; font-size: 1.3rem; text-transform: uppercase; }
+        .card p { font-size: 0.95rem; color: #ccc; margin-bottom: 20px; }
 
         footer { padding: 60px 20px; text-align: center; border-top: 1px solid #333; margin-top: 40px; }
         .contacts { background: #111; padding: 30px; border-radius: 12px; text-align: center; border: 1px solid #222; max-width: 600px; margin: 0 auto; }
-        .contacts p { color: var(--gray); margin-bottom: 10px; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
         .contacts a { color: var(--text); text-decoration: none; font-size: 1.2rem; font-weight: bold; transition: 0.2s; }
 
         @media (max-width: 768px) {
             .hero h1 { font-size: 2.8rem; }
             .hero { height: 70vh; }
+            .grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -105,7 +99,7 @@
                 <div class="card">
                     <div>
                         <h3>Вентильований фасад НВФ Спок</h3>
-                        <p>Монтаж фасадних систем та скління.Висотні роботи.</p>
+                        <p>Монтаж фасадних систем та скління. Висотні роботи та виправлення складних вузлів.</p>
                     </div>
                     <a href="fasadi.html" class="btn btn-sm">Детальніше</a>
                 </div>
@@ -113,15 +107,15 @@
                 <div class="card">
                     <div>
                         <h3>Покрівельні роботи</h3>
-                        <p>Якісний монтаж та сервісне обслуговування.</p>
+                        <p>Якісний монтаж та сервісне обслуговування покрівель будь-якої складності.</p>
                     </div>
                     <a href="pokrivlya.html" class="btn btn-sm">Детальніше</a>
                 </div>
 
                 <div class="card">
                     <div>
-                        <h3>Виробництво</h3>
-                        <p>Гнуття листового металу. Виготовлення спецпланок під об'єкт.</p>
+                        <h3>Виробництво GBUD</h3>
+                        <p>Власний цех гнуття листового металу. Виготовлення спецпланок під об'єкт.</p>
                     </div>
                     <a href="production.html" class="btn btn-sm">Детальніше</a>
                 </div>
@@ -129,7 +123,7 @@
                 <div class="card">
                     <div>
                         <h3>PropTech GBUD</h3>
-                        <p>Моніторинг стану диагностика та системний підхід до експлуатації.</p>
+                        <p>Моніторинг стану, діагностика та системний підхід до експлуатації об'єктів.</p>
                     </div>
                     <a href="https://proptech.com.ua" class="btn btn-sm" target="_blank">Перейти в Lab</a>
                 </div>
@@ -137,7 +131,7 @@
                 <div class="card">
                     <div>
                         <h3>Галерея робіт</h3>
-                        <p>Висотний монтаж, покрівельні роботи та виробництво.</p>
+                        <p>Наші реальні об'єкти: висотний монтаж, покрівельні роботи та виробництво.</p>
                     </div>
                     <a href="gallery.html" class="btn btn-sm" style="border-color: #FFD700; color: #FFD700;">Дивитися фото</a>
                 </div>
@@ -154,10 +148,9 @@
     </main>
 
     <footer>
-        <p>&copy; 2026 GBUD.Digital</p>
+        <p>&copy; 2026 gbud.digital | DigitalBud Systems</p>
     </footer>
 
 </body>
 </html>
-
 
