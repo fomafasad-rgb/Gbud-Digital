@@ -39,6 +39,9 @@
         /* Маленька кнопка для карток */
         .btn-sm { padding: 10px 20px; font-size: 0.8rem; margin-top: 20px; }
 
+        /* Кнопка в шапці */
+        .header-btn { padding: 8px 20px; border: 2px solid var(--primary); color: var(--primary); text-decoration: none; font-weight: 700; border-radius: 5px; text-transform: uppercase; font-size: 0.8rem; transition: 0.3s; letter-spacing: 1px; }
+
         section { padding: 80px 20px; max-width: 1200px; margin: 0 auto; }
         h2 { font-size: 2rem; margin-bottom: 40px; text-align: center; text-transform: uppercase; color: var(--primary); letter-spacing: 1px; }
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
@@ -47,11 +50,15 @@
         .card h3 { color: var(--primary); margin-bottom: 15px; font-size: 1.3rem; text-transform: uppercase; }
         .card p { font-size: 0.95rem; color: #ccc; margin-bottom: 20px; }
 
+        /* ВИПРАВЛЕННЯ ДЛЯ ТЕЛЕФОНІВ: Hover працює ТІЛЬКИ на ПК */
         @media (hover: hover) {
-            .btn:hover { background: var(--primary); color: #000; box-shadow: 0 0 15px rgba(255, 215, 0, 0.4); }
+            .btn:hover, .header-btn:hover { background: var(--primary); color: #000; box-shadow: 0 0 15px rgba(255, 215, 0, 0.4); }
             .card:hover { border-color: var(--primary); transform: translateY(-5px); }
-            .contacts a:hover { color: var(--primary)>
-        .btn:active { background: var(--primary); color: #000; transform: scale(0.98); }
+            .contacts a:hover { color: var(--primary); }
+        }
+        
+        /* Просте підсвічування при дотику на телефоні */
+        .btn:active, .header-btn:active { background: var(--primary); color: #000; transform: scale(0.98); }
 
         footer { padding: 60px 20px; text-align: center; border-top: 1px solid #333; margin-top: 40px; }
         .contacts { background: #111; padding: 30px; border-radius: 12px; text-align: center; border: 1px solid #222; max-width: 600px; margin: 0 auto; }
@@ -68,13 +75,14 @@
 
     <header>
         <div class="logo">DigitalBud</div>
+        <a href="#services" class="header-btn">Послуги</a>
     </header>
 
     <main>
         <section class="hero">
             <h1>Надійність на Висоті</h1>
             <p>Фасади та покрівлі будь-якої складності з практичним досвідом та індивідуальним підходом</p>
-            <a href="#contacts" class="btn">Зв'язатися з майстром</a>
+            <a href="#contacts" class="btn">Зв'язатися</a>
         </section>
 
         <section id="services">
