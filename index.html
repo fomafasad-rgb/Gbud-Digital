@@ -14,6 +14,27 @@
     <meta property="og:image" content="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=2070">
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    /* Партизанська форма - мінімалізм під твої кольори */
+#secure-form-container { width: 100%; text-align: left; }
+.stealth-form { display: flex; flex-direction: column; gap: 25px; }
+.stealth-form input, .stealth-form textarea {
+    width: 100%;
+    padding: 10px 0;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid #333;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 1rem;
+    transition: 0.3s;
+}
+.stealth-form input:focus, .stealth-form textarea:focus {
+    outline: none;
+    border-bottom-color: var(--primary); /* При кліку стає золотим */
+}
+.stealth-form textarea { resize: vertical; min-height: 100px; }
+.stealth-form input::placeholder, .stealth-form textarea::placeholder { color: #555; }
+.stealth-btn { width: 100%; background: transparent; margin-top: 10px; }
     <style>
         :root {
             --primary: #FFD700;
@@ -132,19 +153,31 @@
             </div>
         </section>
 
-        <section id="contacts">
-            <h2>Контакти</h2>
-            <div class="contacts">
-                <p>Прямий зв'язок з майстром:</p>
-                <script>
-                    var user = "gbud.digital";
-                    var domain = "gmail.com";
-                    document.write('<a href="mailto:' + user + '@' + domain + '">' + user + '@' + domain + '</a>');
-                </script>
-                <noscript>Увімкніть JavaScript, щоб побачити контакти</noscript>
-            </div>
-        </section>
-    </main>
+    <section id="contacts">
+    <h2>Контакти</h2>
+    <div class="contacts">
+        <p style="margin-bottom: 30px; color: #ccc;">Залиште заявку, і майстер зв'яжеться з вами напряму:</p>
+        
+        <div id="secure-form-container"></div>
+        <noscript>Увімкніть JavaScript, щоб побачити форму зв'язку.</noscript>
+
+        <script>
+            var f = '<form action="send.php" method="POST" class="stealth-form">';
+            f += '<input type="text" name="name" placeholder="Ваше ім\'я" required>';
+            f += '<input type="text" name="contact_info" placeholder="Телефон або Email" required>';
+            
+            // Залишаємо невидиму пастку для особливо хитрих ботів, які вміють читати JS
+            f += '<div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="bot_check" tabindex="-1" value=""></div>';
+            
+            f += '<textarea name="message" placeholder="Опишіть завдання (фасад, покрівля...)" required></textarea>';
+            f += '<button type="submit" class="btn stealth-btn">Відправити запит</button>';
+            f += '</form>';
+            
+            document.getElementById('secure-form-container').innerHTML = f;
+        </script>
+    </div>
+</section>
+
 
     <footer>
         <p>&copy; 2026 gbud.digital | DigitalBud Systems</p>
