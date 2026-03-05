@@ -3,33 +3,124 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GBUD.Digital | Виробництво</title>
+    <title>Виробництво GBUD | DigitalBud</title>
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://digitalbud.com.ua/production.html" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        :root { --primary: #FFD700; --bg: #0a0a0a; --text: #ffffff; }
-        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; padding: 20px; }
-        .container { max-width: 800px; margin: 0 auto; }
-        h1 { color: var(--primary); text-transform: uppercase; margin-bottom: 20px; }
-        .btn-back { display: inline-block; margin-bottom: 30px; color: var(--primary); text-decoration: none; font-weight: bold; border: 1px solid var(--primary); padding: 10px 20px; border-radius: 5px; }
-        .machine-list { display: grid; gap: 20px; }
-        .machine { background: #1a1a1a; padding: 20px; border-radius: 10px; border: 1px solid #333; }
-        .machine h3 { color: var(--primary); margin-bottom: 10px; }
+        :root {
+            --primary: #FFD700;
+            --bg: #0a0a0a;
+            --card-bg: #1a1a1a;
+            --text: #ffffff;
+            --gray: #888888;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+
+        header { padding: 20px; display: flex; justify-content: space-between; align-items: center; background: rgba(10,10,10,0.9); border-bottom: 1px solid #333; position: sticky; top: 0; z-index: 100; }
+        .logo { font-weight: 900; color: var(--primary); text-transform: uppercase; text-decoration: none; font-size: 1.2rem; }
+        .back-link { color: var(--text); text-decoration: none; font-size: 0.9rem; border: 1px solid var(--primary); padding: 5px 15px; border-radius: 4px; }
+
+        section { padding: 60px 20px; max-width: 900px; margin: 0 auto; }
+        h1 { font-size: 2.5rem; color: var(--primary); text-transform: uppercase; margin-bottom: 20px; line-height: 1.1; }
+
+        .subtitle-box { border-left: 3px solid var(--primary); padding-left: 20px; margin-bottom: 40px; }
+        .subtitle-main { color: #fff; font-size: 1.2rem; font-weight: 700; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; }
+        .subtitle-desc { color: var(--gray); font-size: 1.1rem; }
+
+        .content-block { margin-bottom: 50px; }
+        h2 { color: var(--primary); text-transform: uppercase; font-size: 1.4rem; margin-bottom: 25px; }
+        p { margin-bottom: 20px; color: #ccc; }
+
+        .spec-list { list-style: none; margin-bottom: 30px; }
+        .spec-list li {
+            padding: 20px;
+            background: var(--card-bg);
+            border: 1px solid #222;
+            margin-bottom: 15px;
+            border-radius: 4px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .spec-list li::before {
+            content: "→";
+            color: var(--primary);
+            margin-right: 15px;
+            font-weight: bold;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .spec-content { display: flex; flex-direction: column; }
+        .spec-title {
+            color: var(--primary);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 1rem;
+            margin-bottom: 8px;
+            display: block;
+        }
+        .spec-desc { color: #ccc; font-size: 0.95rem; }
+
+        footer { padding: 40px 20px; text-align: center; border-top: 1px solid #333; color: var(--gray); font-size: 0.8rem; }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 1.8rem; }
+            section { padding: 40px 15px; }
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <a href="index.html" class="btn-back">← НА ГОЛОВНУ</a>
-        <h1>Виробництво</h1>
-        <div class="machine-list">
-            <div class="machine">
-                <h3>Листозгинальне обладнання</h3>
-                <p>Використання листозгінальних верстатів для виготовлення спецпланок будь-якої складності.</p>
+
+    <header>
+        <a href="index.html" class="logo">DigitalBud</a>
+        <a href="index.html" class="back-link">← Назад</a>
+    </header>
+
+    <main>
+        <section>
+            <h1>Виробництво<br><span>GBUD</span></h1>
+
+            <div class="subtitle-box">
+                <div class="subtitle-main">Цех металообробки</div>
+                <div class="subtitle-desc">Гнуття листового металу та виготовлення спецпланок під конкретний об'єкт.</div>
             </div>
-            <div class="machine">
-                <h3>Оперативність</h3>
-                <p>Виробництво дозволяє виготовляти деталі "на сьогодні", не зупиняючи монтажні роботи.</p>
+
+            <div class="content-block">
+                <h2>Наші можливості</h2>
+                <ul class="spec-list">
+                    <li>
+                        <div class="spec-content">
+                            <span class="spec-title">Листозгинальне обладнання:</span>
+                            <span class="spec-desc">Використання листозгінальних верстатів для виготовлення спецпланок будь-якої складності.</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="spec-content">
+                            <span class="spec-title">Оперативність:</span>
+                            <span class="spec-desc">Виробництво дозволяє виготовляти деталі "на сьогодні", не зупиняючи монтажні роботи.</span>
+                        </div>
+                    </li>
+                </ul>
             </div>
-        </div>
-    </div>
+
+            <div class="content-block">
+                <h2>Перевага виробництва</h2>
+                <p>Виробництво дає повну незалежність від постачальників і дозволяє швидко реагувати на нестандартні ситуації на об'єкті. Кожна планка виготовляється під точні розміри замовника без зайвих затримок.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© <span id="year"></span> gbud.digital | Реальні технології для реальних об'єктів</p>
+    </footer>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+
 </body>
 </html>
