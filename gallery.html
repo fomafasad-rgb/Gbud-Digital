@@ -4,14 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- ВИПРАВЛЕНО: Дозволяємо індексацію, але без пріоритету -->
+    <!-- ДОЗВОЛЯЄМО ГУГЛУ БАЧИТИ ГАЛЕРЕЮ -->
     <meta name="robots" content="index, follow">
-    
-    <!-- ВИПРАВЛЕНО: Канонічне посилання має вести на САМУ ГАЛЕРЕЮ -->
     <link rel="canonical" href="https://digitalbud.com.ua/gallery.html" />
     
     <title>Галерея робіт | DigitalBud — Наші об'єкти</title>
-    <meta name="description" content="Фотозвіт виконаних робіт DigitalBud: монтаж вентильованих фасадів, покрівельні роботи та вироби власного виробництва GBUD.">
+    <meta name="description" content="Фото виконаних робіт DigitalBud: монтаж НВФ фасадів, покрівля та вироби власного виробництва GBUD.">
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
@@ -27,147 +25,48 @@
         body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
 
         header { 
-            padding: 20px; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            background: rgba(10,10,10,0.9); 
-            border-bottom: 1px solid #333; 
-            position: sticky; 
-            top: 0; 
-            z-index: 100; 
-            backdrop-filter: blur(10px);
+            padding: 20px; display: flex; justify-content: space-between; align-items: center; 
+            background: rgba(10,10,10,0.9); border-bottom: 1px solid #333; position: sticky; top: 0; z-index: 100; backdrop-filter: blur(10px);
         }
-        .logo { font-weight: 900; color: var(--primary); text-transform: uppercase; text-decoration: none; font-size: 1.2rem; letter-spacing: 1px; }
+        .logo { font-weight: 900; color: var(--primary); text-transform: uppercase; text-decoration: none; font-size: 1.2rem; }
         .back-btn { color: var(--text); text-decoration: none; font-size: 0.8rem; font-weight: 700; border: 1px solid var(--primary); padding: 8px 16px; border-radius: 4px; text-transform: uppercase; transition: 0.3s; }
         .back-btn:hover { background: var(--primary); color: #000; }
 
         section { padding: 40px 20px; max-width: 1200px; margin: 0 auto; }
-        h1 { font-size: 2rem; margin-bottom: 10px; text-transform: uppercase; color: var(--primary); text-align: center; font-weight: 900; }
-        .sub-h1 { text-align: center; color: var(--gray); font-size: 0.9rem; margin-bottom: 40px; text-transform: uppercase; letter-spacing: 2px; }
+        h1 { font-size: 2.2rem; margin-bottom: 10px; text-transform: uppercase; color: var(--primary); text-align: center; font-weight: 900; }
+        .sub-h1 { text-align: center; color: var(--gray); font-size: 0.8rem; margin-bottom: 40px; text-transform: uppercase; letter-spacing: 2px; }
         
-        .gallery-grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
-            gap: 20px; 
-        }
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+        .photo-card { background: var(--card-bg); border: 1px solid #222; border-radius: 12px; overflow: hidden; transition: 0.4s; }
+        .photo-card:hover { transform: translateY(-8px); border-color: var(--primary); }
 
-        .photo-card { 
-            background: var(--card-bg); 
-            border: 1px solid #222; 
-            border-radius: 12px; 
-            overflow: hidden; 
-            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .photo-card:hover { transform: translateY(-10px); border-color: var(--primary); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-
-        .img-container {
-            height: 250px;
-            background: #080808;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .photo-card img { 
-            width: 100%; 
-            height: 100%; 
-            object-fit: cover; 
-            transition: 0.5s;
-            filter: brightness(0.8);
-        }
-        .photo-card:hover img { filter: brightness(1); transform: scale(1.1); }
+        .img-placeholder { height: 250px; background: #080808; display: flex; align-items: center; justify-content: center; color: #222; font-weight: 900; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; }
 
         .photo-info { padding: 20px; border-top: 1px solid #222; }
-        .photo-info h3 { font-size: 1.1rem; color: var(--primary); margin-bottom: 8px; text-transform: uppercase; font-weight: 900; }
-        .photo-info p { font-size: 0.85rem; color: #888; line-height: 1.4; }
+        .photo-info h3 { font-size: 1.1rem; color: var(--primary); margin-bottom: 8px; text-transform: uppercase; }
+        .photo-info p { font-size: 0.85rem; color: #888; }
 
-        .placeholder-text {
-            font-size: 0.7rem;
-            color: #222;
-            font-weight: 900;
-            text-transform: uppercase;
-        }
-
-        footer { padding: 60px 20px; text-align: center; color: #333; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; border-top: 1px solid #111; margin-top: 40px; }
-
-        @media (max-width: 768px) {
-            h1 { font-size: 1.6rem; }
-            section { padding: 20px 15px; }
-            .gallery-grid { gap: 15px; }
-        }
+        footer { padding: 60px 20px; text-align: center; color: #333; font-size: 0.7rem; text-transform: uppercase; border-top: 1px solid #111; margin-top: 40px; }
     </style>
 </head>
 <body>
-
     <header>
         <a href="index.html" class="logo">DigitalBud</a>
         <a href="index.html" class="back-btn">На головну</a>
     </header>
-
     <main>
         <section>
-            <h1>Галерея об'єктів</h1>
-            <p class="sub-h1">Реальні процеси та результати</p>
-            
+            <h1>Галерея робіт</h1>
+            <p class="sub-h1">Цифрова фіксація результатів</p>
             <div class="gallery-grid">
-                
-                <!-- Картка фото 1 -->
-                <div class="photo-card">
-                    <div class="img-container">
-                        <!-- Коли будуть фото, заміни placeholder на <img src="шлях_до_фото.jpg" alt="Опис"> -->
-                        <span class="placeholder-text">Photo Asset / DigitalBud Lab</span>
-                    </div>
-                    <div class="photo-info">
-                        <h3>Висотний монтаж НВФ</h3>
-                        <p>Приклад влаштування підконструкції та утеплення фасаду.</p>
-                    </div>
-                </div>
-
-                <!-- Картка фото 2 -->
-                <div class="photo-card">
-                    <div class="img-container">
-                        <span class="placeholder-text">Photo Asset / DigitalBud Lab</span>
-                    </div>
-                    <div class="photo-info">
-                        <h3>Скління СПОК</h3>
-                        <p>Монтаж алюмінієвих систем та герметизація вузлів примикання.</p>
-                    </div>
-                </div>
-
-                <!-- Картка фото 3 -->
-                <div class="photo-card">
-                    <div class="img-container">
-                        <span class="placeholder-text">Photo Asset / DigitalBud Lab</span>
-                    </div>
-                    <div class="photo-info">
-                        <h3>Виробництво GBUD</h3>
-                        <p>Гнуття металевих касет та спецпланок на власному обладнанні.</p>
-                    </div>
-                </div>
-
-                <!-- Картка фото 4 -->
-                <div class="photo-card">
-                    <div class="img-container">
-                        <span class="placeholder-text">Photo Asset / DigitalBud Lab</span>
-                    </div>
-                    <div class="photo-info">
-                        <h3>Покрівельні роботи</h3>
-                        <p>Приклад сервісного обслуговування та гідроізоляції покрівлі.</p>
-                    </div>
-                </div>
-
+                <div class="photo-card"><div class="img-placeholder">Image Asset / GBUD Lab</div><div class="photo-info"><h3>Монтаж НВФ</h3><p>Влаштування підконструкції та утеплення.</p></div></div>
+                <div class="photo-card"><div class="img-placeholder">Image Asset / GBUD Lab</div><div class="photo-info"><h3>Скління СПОК</h3><p>Робота з алюмінієвими профільними системами.</p></div></div>
+                <div class="photo-card"><div class="img-placeholder">Image Asset / GBUD Lab</div><div class="photo-info"><h3>Виробництво</h3><p>Власне гнуття спецпланок та касет.</p></div></div>
+                <div class="photo-card"><div class="img-placeholder">Image Asset / GBUD Lab</div><div class="photo-info"><h3>Покрівля</h3><p>Гідроізоляція та сервісне обслуговування.</p></div></div>
             </div>
         </section>
     </main>
-
-    <footer>
-        <p>DigitalBud © 2026 | Всі фото зафіксовані GBUD Lab</p>
-    </footer>
-
+    <footer>DigitalBud © 2026 | Всі права захищені</footer>
 </body>
 </html>
 
