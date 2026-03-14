@@ -22,7 +22,17 @@
         ::-webkit-scrollbar-thumb:hover { background: var(--primary); }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; overflow-x: hidden; }
+        
+        /* ДОДАНО: Згладжування шрифтів для чіткості на моніторах */
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background: var(--bg); 
+            color: var(--text); 
+            line-height: 1.6; 
+            overflow-x: hidden; 
+            -webkit-font-smoothing: antialiased; 
+            -moz-osx-font-smoothing: grayscale; 
+        }
 
         header { padding: 20px; display: flex; justify-content: space-between; align-items: center; background: rgba(10,10,10,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid #333; position: sticky; top: 0; z-index: 1000; }
         .logo { font-weight: 900; color: var(--primary); text-transform: uppercase; text-decoration: none; font-size: 1.2rem; letter-spacing: 1px; transition: opacity 0.3s; }
@@ -73,7 +83,14 @@
             margin-bottom: 8px;
             display: block;
         }
-        .spec-desc { color: #ccc; font-size: 0.95rem; }
+        
+        /* ДОДАНО: Покращена читабельність опису (розмір, інтервал, товщина) */
+        .spec-desc { 
+            color: #ccc; 
+            font-size: 1rem; 
+            line-height: 1.7; 
+            font-weight: 400; 
+        }
 
         /* БЛОК ФОТО */
         .photo-grid {
