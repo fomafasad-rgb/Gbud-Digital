@@ -11,7 +11,7 @@
     <meta name="robots" content="index, follow">
 
     <meta property="og:title" content="DigitalBud | Фасади та Покрівля">
-    <meta property="og:description" content="Надійність на висоті. Вентильовані фасади, покрівельні роботи та власне виробництво GBUD.">
+    <meta property="og:description" content="Надійність на висоті. Вентильовані фасади, покрівельні роботи та властне виробництво.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://digitalbud.com.ua/">
     <meta property="og:image" content="https://digitalbud.com.ua/hero.jpg">
@@ -83,6 +83,7 @@
         .badge-lab { color: #4ade80; border: 1px solid #4ade80; }
         .card h3 { color: var(--primary); margin-bottom: 15px; font-size: 1.3rem; text-transform: uppercase; padding-right: 60px; }
         .card p { font-size: 0.95rem; color: #ccc; margin-bottom: 20px; }
+        
         /* КОНТАКТИ */
         .contacts {
             background: #111;
@@ -220,7 +221,7 @@
                         <h3>PropTech GBUD</h3>
                         <p>Моніторинг стану, діагностика та системний підхід до експлуатації через Lab.</p>
                     </div>
-                    <a href="https://proptech.com.ua" class="btn btn-sm" target="_blank" rel="noopener">Перейти в Lab</a>
+                    <a href="https://proptech.com.ua" class="btn btn-sm" target="_blank" rel="noopener noreferrer">Перейти в Lab</a>
                 </div>
 
                 <div class="card">
@@ -244,12 +245,11 @@
                 </div>
             </div>
 
-            <!-- ФОРМА ЗАЯВКИ -->
             <form class="contact-form" id="contact-form" action="https://formspree.io/f/xzdjpwjj" method="POST">
-                <input type="text" name="_gotcha" style="display:none">
-                <input type="text" name="name" placeholder="Ваше ім'я" required>
-                <input type="tel" name="phone" placeholder="Номер телефону" required>
-                <textarea name="message" placeholder="Опишіть що потрібно зробити (необов'язково)"></textarea>
+                <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+                <input type="text" name="name" placeholder="Ваше ім'я" required aria-label="Ваше ім'я">
+                <input type="tel" name="phone" placeholder="Номер телефону" required aria-label="Номер телефону">
+                <textarea name="message" placeholder="Опишіть що потрібно зробити (необов'язково)" aria-label="Опишіть що потрібно зробити"></textarea>
                 <button type="submit">Надіслати заявку</button>
             </form>
             <div class="form-success" id="form-success">✓ Заявку отримано! Зв'яжемося найближчим часом.</div>
@@ -277,7 +277,7 @@
         // Автооновлення року
         document.getElementById('current-year').textContent = new Date().getFullYear();
 
-        // Обробка форми без перезавантаження сторінки
+        // Обробка форми без перезавантаження сторінки з обробкою помилок
         var form = document.getElementById('contact-form');
         form.addEventListener('submit', function(e) {
             e.preventDefault();
@@ -290,7 +290,11 @@
                 if (response.ok) {
                     form.style.display = 'none';
                     document.getElementById('form-success').style.display = 'block';
+                } else {
+                    alert("Виникла помилка при відправці. Будь ласка, спробуйте пізніше.");
                 }
+            }).catch(function(error) {
+                alert("Помилка з'єднання. Перевірте підключення до інтернету.");
             });
         });
     </script>
