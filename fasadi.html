@@ -241,6 +241,12 @@
                         return;
                     } else {
                         entry.target.classList.add('visible');
+                        
+                        // ДОДАНО: Скидаємо will-change для повернення чіткості шрифту
+                        setTimeout(function() {
+                            entry.target.style.willChange = 'auto';
+                        }, 1000);
+
                         appearOnScroll.unobserve(entry.target);
                     }
                 });
