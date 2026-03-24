@@ -44,26 +44,53 @@
         :root {
             --primary: #FFD700;
             --bg: #0a0a0a;
-            --card-bg: #1a1a1a;
+            --card-bg: rgba(26, 26, 26, 0.7); /* Glassmorphism */
             --text: #ffffff;
             --gray: #888888;
         }
 
         html { scroll-behavior: smooth; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        /* ДОДАНО: Згладжування шрифтів для ідеальної чіткості */
-        body { 
-            font-family: 'Inter', sans-serif; 
-            background: var(--bg); 
-            color: var(--text); 
-            line-height: 1.6; 
-            overflow-x: hidden; 
-            -webkit-font-smoothing: antialiased; 
-            -moz-osx-font-smoothing: grayscale; 
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            position: relative;
         }
 
-        /* 3. Кастомний скроллбар */
+        /* Анімований фон — Canvas Grid */
+        #grid-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            pointer-events: none;
+            background-color: var(--bg);
+        }
+
+        /* Glassmorphism картки */
+        .card {
+            background: var(--card-bg);
+            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(12px);
+            padding: 35px;
+            padding-top: 55px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+        }
+
         ::-webkit-scrollbar { width: 10px; }
         ::-webkit-scrollbar-track { background: var(--bg); }
         ::-webkit-scrollbar-thumb { background: #333; border-radius: 5px; }
@@ -76,10 +103,10 @@
             align-items: center;
             position: sticky;
             top: 0;
-            background: rgba(10,10,10,0.9);
-            backdrop-filter: blur(10px);
+            background: rgba(10,10,10,0.85);
+            backdrop-filter: blur(15px);
             z-index: 1000;
-            border-bottom: 1px solid #333;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
         .logo { font-weight: 900; font-size: 1.5rem; color: var(--primary); text-transform: uppercase; letter-spacing: 2px; text-decoration: none; transition: opacity 0.3s; }
         .logo:hover { opacity: 0.8; }
@@ -93,33 +120,41 @@
             align-items: center;
             text-align: center;
             padding: 20px;
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+            background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)),
                         url('hero.jpg') center/cover no-repeat;
+            position: relative;
         }
-        .hero h1 { font-size: clamp(2.5rem, 7vw, 4.5rem); line-height: 1.1; margin-bottom: 20px; text-transform: uppercase; font-weight: 900; }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url('hero.jpg') center/cover no-repeat;
+            opacity: 0.2;
+            z-index: -1;
+        }
+
+        .hero h1 { font-size: clamp(2.5rem, 7vw, 4.5rem); line-height: 1.1; margin-bottom: 20px; text-transform: uppercase; font-weight: 900; text-shadow: 0 0 15px rgba(255, 215, 0, 0.3); }
         .hero span { color: var(--primary); font-weight: bold; }
         .hero p { font-size: 1.2rem; color: #ddd; max-width: 700px; margin-bottom: 30px; font-weight: 500; }
 
         .btn { display: inline-block; padding: 15px 35px; border: 2px solid var(--primary); color: var(--primary); text-decoration: none; font-weight: 700; border-radius: 5px; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; cursor: pointer; background: transparent; }
         .btn-sm { padding: 10px 20px; font-size: 0.8rem; margin-top: 20px; display: inline-block; }
 
-        section { padding: 80px 20px; max-width: 1200px; margin: 0 auto; }
+        section { padding: 80px 20px; max-width: 1200px; margin: 0 auto; position: relative; z-index: 10; }
         #services { scroll-margin-top: 80px; }
         #contacts { text-align: center; padding-left: 16px; padding-right: 16px; scroll-margin-top: 80px; }
 
-        h2 { font-size: 2rem; margin-bottom: 40px; text-align: center; text-transform: uppercase; color: var(--primary); letter-spacing: 1px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+        h2 { font-size: 2.5rem; margin-bottom: 50px; text-align: center; text-transform: uppercase; color: var(--primary); letter-spacing: 1.5px; text-shadow: 0 0 10px rgba(255, 215, 0, 0.2); }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
 
-        .card { background: var(--card-bg); padding: 35px; padding-top: 55px; border-radius: 12px; border: 1px solid #222; transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s; display: flex; flex-direction: column; justify-content: space-between; position: relative; }
         .badge { position: absolute; top: 14px; right: 14px; font-size: 0.65rem; font-weight: 700; letter-spacing: 1.5px; padding: 3px 8px; border-radius: 4px; text-transform: uppercase; }
         .badge-gbud { color: var(--primary); border: 1px solid var(--primary); }
         .badge-lab { color: #4ade80; border: 1px solid #4ade80; }
         .card h3 { color: var(--primary); margin-bottom: 15px; font-size: 1.3rem; text-transform: uppercase; padding-right: 60px; }
-        
-        /* ДОДАНО: Покращено читабельність тексту в картках */
         .card p { font-size: 1rem; color: #ccc; margin-bottom: 20px; line-height: 1.7; font-weight: 400; }
-        
-        /* 4. Класи для анімації появи (Fade-in) */
+
+        /* Fade-in анімація */
         .fade-in {
             opacity: 0;
             transform: translateY(30px);
@@ -131,13 +166,14 @@
             transform: translateY(0);
         }
 
-        /* КОНТАКТИ */
+        /* Контакти — glassmorphism */
         .contacts {
-            background: #111;
+            background: rgba(26, 26, 26, 0.9);
+            backdrop-filter: blur(10px);
             padding: 36px 28px;
             border-radius: 12px;
             text-align: center;
-            border: 1px solid #333;
+            border: 1px solid rgba(255, 255, 255, 0.05);
             max-width: 560px;
             margin: 0 auto;
             width: 100%;
@@ -145,63 +181,20 @@
         .contacts p { color: var(--gray); margin-bottom: 10px; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
         .contacts a { color: var(--primary); text-decoration: none; font-size: 1.15rem; font-weight: bold; transition: 0.2s; border-bottom: 1px solid rgba(255,215,0,0.35); padding-bottom: 2px; word-break: break-all; }
 
-        /* ФОРМА */
-        .contact-form {
-            max-width: 560px;
-            margin: 30px auto 0;
-            text-align: left;
-        }
-        .contact-form input,
-        .contact-form textarea {
-            width: 100%;
-            background: #111;
-            border: 1px solid #333;
-            border-radius: 8px;
-            padding: 14px 16px;
-            color: var(--text);
-            font-family: 'Inter', sans-serif;
-            font-size: 0.95rem;
-            margin-bottom: 14px;
-            outline: none;
-            transition: border-color 0.25s;
-        }
-        .contact-form input:focus,
-        .contact-form textarea:focus { border-color: var(--primary); }
-        .contact-form input::placeholder,
-        .contact-form textarea::placeholder { color: #555; }
+        /* Форма */
+        .contact-form { max-width: 560px; margin: 30px auto 0; text-align: left; }
+        .contact-form input, .contact-form textarea { width: 100%; background: #111; border: 1px solid #333; border-radius: 8px; padding: 14px 16px; color: var(--text); font-family: 'Inter', sans-serif; font-size: 0.95rem; margin-bottom: 14px; outline: none; transition: border-color 0.25s; }
+        .contact-form input:focus, .contact-form textarea:focus { border-color: var(--primary); }
+        .contact-form input::placeholder, .contact-form textarea::placeholder { color: #555; }
         .contact-form textarea { height: 120px; resize: vertical; }
-        .contact-form button {
-            width: 100%;
-            padding: 14px;
-            background: transparent;
-            border: 2px solid var(--primary);
-            color: var(--primary);
-            font-family: 'Inter', sans-serif;
-            font-weight: 700;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: 0.25s;
-        }
-        .form-success {
-            display: none;
-            text-align: center;
-            color: var(--primary);
-            font-weight: 700;
-            font-size: 1rem;
-            padding: 20px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
+        .contact-form button { width: 100%; padding: 14px; background: transparent; border: 2px solid var(--primary); color: var(--primary); font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; border-radius: 6px; cursor: pointer; transition: 0.25s; }
+        .form-success { display: none; text-align: center; color: var(--primary); font-weight: 700; font-size: 1rem; padding: 20px; letter-spacing: 1px; text-transform: uppercase; }
 
-        footer { padding: 60px 20px; text-align: center; border-top: 1px solid #333; margin-top: 40px; color: var(--gray); font-size: 0.9rem; }
+        footer { padding: 60px 20px; text-align: center; border-top: 1px solid rgba(255, 255, 255, 0.05); margin-top: 40px; color: var(--gray); font-size: 0.9rem; position: relative; z-index: 10; }
 
         @media (hover: hover) {
             .btn:hover, .header-btn:hover { background: var(--primary); color: #000; box-shadow: 0 0 15px rgba(255,215,0,0.4); }
-            /* Адаптований hover для карток, щоб не конфліктував з fade-in */
-            .card.visible:hover { border-color: var(--primary); transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
+            .card.visible:hover { border-color: var(--primary); transform: translateY(-5px); box-shadow: 0 10px 30px rgba(255,215,0,0.1); }
             .contacts a:hover { color: #fff; }
             .contact-form button:hover { background: var(--primary); color: #000; }
         }
@@ -213,11 +206,9 @@
             .hero h1 { font-size: 2.5rem; }
             .hero p { font-size: 1rem; }
             section { padding: 60px 16px; }
-            h2 { font-size: 1.6rem; }
-            .grid { grid-template-columns: 1fr; gap: 16px; }
-            .card { padding: 24px; }
-            .card h3 { font-size: 1.1rem; }
-            .contacts { padding: 24px 20px; }
+            h2 { font-size: 1.8rem; }
+            .grid { grid-template-columns: 1fr; gap: 20px; }
+            .card { padding: 30px; }
             header { padding: 16px; }
             .logo { font-size: 1.2rem; }
         }
@@ -228,6 +219,8 @@
     </style>
 </head>
 <body>
+
+    <canvas id="grid-canvas"></canvas>
 
     <header>
         <a href="#" class="logo">DigitalBud</a>
@@ -325,7 +318,7 @@
         // Автооновлення року
         document.getElementById('current-year').textContent = new Date().getFullYear();
 
-        // Обробка форми без перезавантаження
+        // Обробка форми без перезавантаження (Formspree)
         var form = document.getElementById('contact-form');
         form.addEventListener('submit', function(e) {
             e.preventDefault();
@@ -346,36 +339,92 @@
             });
         });
 
-        // Магія плавної появи елементів при скролінгу (Intersection Observer)
+        // Intersection Observer — fade-in + скидання will-change для чіткості шрифтів (зі старої версії)
         document.addEventListener("DOMContentLoaded", function() {
             var faders = document.querySelectorAll('.fade-in');
-            
             var appearOptions = {
-                threshold: 0.15, // Елемент з'явиться, коли 15% його буде на екрані
+                threshold: 0.15,
                 rootMargin: "0px 0px -50px 0px"
             };
 
             var appearOnScroll = new IntersectionObserver(function(entries, appearOnScroll) {
                 entries.forEach(function(entry) {
-                    if (!entry.isIntersecting) {
-                        return;
-                    } else {
-                        entry.target.classList.add('visible');
-                        
-                        // ДОДАНО: Скидаємо will-change для повернення чіткості шрифту
-                        setTimeout(function() {
-                            entry.target.style.willChange = 'auto';
-                        }, 1000);
-                        
-                        appearOnScroll.unobserve(entry.target); // Припиняємо спостерігати після появи
-                    }
+                    if (!entry.isIntersecting) { return; }
+                    entry.target.classList.add('visible');
+                    // Скидаємо will-change після анімації для чіткості тексту
+                    setTimeout(function() {
+                        entry.target.style.willChange = 'auto';
+                    }, 1000);
+                    appearOnScroll.unobserve(entry.target);
                 });
             }, appearOptions);
 
-            faders.forEach(function(fader) {
-                appearOnScroll.observe(fader);
-            });
+            faders.forEach(function(fader) { appearOnScroll.observe(fader); });
         });
+
+        // Анімований фон — Canvas Grid (з нової версії)
+        (function() {
+            var canvas = document.getElementById('grid-canvas');
+            var ctx = canvas.getContext('2d');
+
+            var gridSize = 40;
+            var primaryColor = 'rgba(255, 215, 0, 0.04)';
+            var dotColor = 'rgba(255, 255, 255, 0.02)';
+
+            var rotation = 0;
+            var w, h;
+
+            function resize() {
+                w = canvas.width = window.innerWidth;
+                h = canvas.height = window.innerHeight;
+            }
+
+            window.addEventListener('resize', resize);
+            resize();
+
+            function draw() {
+                ctx.clearRect(0, 0, w, h);
+
+                ctx.save();
+                ctx.translate(w / 2, h / 2);
+                ctx.rotate(rotation);
+
+                var numLines = 50;
+
+                ctx.strokeStyle = primaryColor;
+                ctx.lineWidth = 1;
+
+                for (var i = -numLines; i < numLines; i++) {
+                    ctx.beginPath();
+                    ctx.moveTo(i * gridSize, -numLines * gridSize);
+                    ctx.lineTo(i * gridSize, numLines * gridSize);
+                    ctx.stroke();
+
+                    ctx.beginPath();
+                    ctx.moveTo(-numLines * gridSize, i * gridSize);
+                    ctx.lineTo(numLines * gridSize, i * gridSize);
+                    ctx.stroke();
+                }
+
+                ctx.fillStyle = dotColor;
+                for (var i = -numLines; i < numLines; i++) {
+                    for (var j = -numLines; j < numLines; j++) {
+                        if (i % 2 === 0 && j % 2 === 0) {
+                            ctx.beginPath();
+                            ctx.arc(i * gridSize, j * gridSize, 1.5, 0, Math.PI * 2);
+                            ctx.fill();
+                        }
+                    }
+                }
+
+                ctx.restore();
+
+                rotation += 0.0002;
+                requestAnimationFrame(draw);
+            }
+
+            draw();
+        })();
     </script>
 
 </body>
