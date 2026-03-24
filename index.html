@@ -63,6 +63,19 @@
             position: relative;
         }
 
+        /* 1. Прелоадер */
+        #preloader {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--bg); z-index: 9999;
+            display: flex; justify-content: center; align-items: center;
+            transition: opacity 0.6s ease, visibility 0.6s;
+        }
+        .loader-logo {
+            font-size: 2.5rem; color: var(--primary); font-weight: 900; letter-spacing: 3px;
+            text-transform: uppercase; animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse { 0% { opacity: 0.5; transform: scale(0.95); } 50% { opacity: 1; transform: scale(1.05); text-shadow: 0 0 20px rgba(255,215,0,0.5); } 100% { opacity: 0.5; transform: scale(0.95); } }
+
         /* Анімований фон — Canvas Grid */
         #grid-canvas {
             position: fixed;
@@ -75,7 +88,7 @@
             background-color: var(--bg);
         }
 
-        /* Glassmorphism картки */
+        /* Glassmorphism картки з підтримкою 3D */
         .card {
             background: var(--card-bg);
             -webkit-backdrop-filter: blur(12px);
@@ -84,11 +97,12 @@
             padding-top: 55px;
             border-radius: 12px;
             border: 1px solid rgba(255, 255, 255, 0.08);
-            transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             position: relative;
+            transform-style: preserve-3d; /* Вмикаємо 3D простір всередині картки */
+            transition: transform 0.5s ease-out, box-shadow 0.5s ease; /* Плавне повернення */
         }
 
         ::-webkit-scrollbar { width: 10px; }
@@ -139,6 +153,7 @@
         .hero p { font-size: 1.2rem; color: #ddd; max-width: 700px; margin-bottom: 30px; font-weight: 500; }
 
         .btn { display: inline-block; padding: 15px 35px; border: 2px solid var(--primary); color: var(--primary); text-decoration: none; font-weight: 700; border-radius: 5px; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; cursor: pointer; background: transparent; }
+        
         .btn-sm { padding: 10px 20px; font-size: 0.8rem; margin-top: 20px; display: inline-block; }
 
         section { padding: 80px 20px; max-width: 1200px; margin: 0 auto; position: relative; z-index: 10; }
@@ -146,8 +161,9 @@
         #contacts { text-align: center; padding-left: 16px; padding-right: 16px; scroll-margin-top: 80px; }
 
         h2 { font-size: 2.5rem; margin-bottom: 50px; text-align: center; text-transform: uppercase; color: var(--primary); letter-spacing: 1.5px; text-shadow: 0 0 10px rgba(255, 215, 0, 0.2); }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; perspective: 1000px; }
 
+        /* Елементи картки випирають в 3D */
         .badge { position: absolute; top: 14px; right: 14px; font-size: 0.65rem; font-weight: 700; letter-spacing: 1.5px; padding: 3px 8px; border-radius: 4px; text-transform: uppercase; }
         .badge-gbud { color: var(--primary); border: 1px solid var(--primary); }
         .badge-lab { color: #4ade80; border: 1px solid #4ade80; }
@@ -190,11 +206,24 @@
         .contact-form button { width: 100%; padding: 14px; background: transparent; border: 2px solid var(--primary); color: var(--primary); font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; border-radius: 6px; cursor: pointer; transition: 0.25s; }
         .form-success { display: none; text-align: center; color: var(--primary); font-weight: 700; font-size: 1rem; padding: 20px; letter-spacing: 1px; text-transform: uppercase; }
 
+        /* Плаваюча кнопка Telegram */
+        .floating-btn {
+            position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px;
+            background: var(--primary); border-radius: 50%;
+            display: flex; justify-content: center; align-items: center;
+            box-shadow: 0 4px 20px rgba(255, 215, 0, 0.4);
+            z-index: 1000; transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+        .floating-btn:hover { transform: scale(1.1); box-shadow: 0 6px 25px rgba(255, 215, 0, 0.6); }
+        .floating-btn svg { width: 30px; height: 30px; fill: #000; margin-right: 2px; margin-top: 2px; }
+
         footer { padding: 60px 20px; text-align: center; border-top: 1px solid rgba(255, 255, 255, 0.05); margin-top: 40px; color: var(--gray); font-size: 0.9rem; position: relative; z-index: 10; }
 
         @media (hover: hover) {
             .btn:hover, .header-btn:hover { background: var(--primary); color: #000; box-shadow: 0 0 15px rgba(255,215,0,0.4); }
-            .card.visible:hover { border-color: var(--primary); transform: translateY(-5px); box-shadow: 0 10px 30px rgba(255,215,0,0.1); }
+            /* Прибрали старий hover для карток, бо тепер цим керує JS */
+            .card.visible:hover { box-shadow: 0 15px 40px rgba(255,215,0,0.15); } 
             .contacts a:hover { color: #fff; }
             .contact-form button:hover { background: var(--primary); color: #000; }
         }
@@ -211,6 +240,8 @@
             .card { padding: 30px; }
             header { padding: 16px; }
             .logo { font-size: 1.2rem; }
+            .floating-btn { bottom: 20px; right: 20px; width: 50px; height: 50px; }
+            .floating-btn svg { width: 25px; height: 25px; }
         }
         @media (max-width: 400px) {
             .hero h1 { font-size: 2rem; }
@@ -219,6 +250,10 @@
     </style>
 </head>
 <body>
+
+    <div id="preloader">
+        <div class="loader-logo">DigitalBud</div>
+    </div>
 
     <canvas id="grid-canvas"></canvas>
 
@@ -301,6 +336,12 @@
         <p>&copy; <span id="current-year"></span> GBUD.Digital | digitalbud.com.ua</p>
     </footer>
 
+    <a href="https://t.me/digitalbud" target="_blank" class="floating-btn" aria-label="Написати в Telegram">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 0C5.37 0 0 5.37 0 12c0 6.627 5.37 12 12 12 6.626 0 12-5.373 12-12C24 5.37 18.626 0 12 0zm5.56 8.16l-1.93 9.07c-.14.65-.53.81-1.07.51l-2.97-2.18-1.43 1.38c-.16.16-.3.3-.61.3l.21-3.03 5.52-4.98c.24-.22-.05-.34-.38-.11l-6.82 4.3-2.94-.92c-.64-.2-.65-.64.13-.95l11.48-4.43c.53-.19 1 .13.81.94z"/>
+        </svg>
+    </a>
+
     <script>
         // Intersection Observer стартує одразу — не чекає load
         var faders = document.querySelectorAll('.fade-in');
@@ -316,13 +357,21 @@
         }, appearOptions);
         faders.forEach(function(fader) { appearOnScroll.observe(fader); });
 
-        // Решта — після повного завантаження сторінки
+        // Основний функціонал після повного завантаження сторінки
         window.addEventListener('load', function() {
+            
+            // 1. Приховування прелоадера
+            var preloader = document.getElementById('preloader');
+            if(preloader) {
+                preloader.style.opacity = '0';
+                setTimeout(function() { preloader.style.visibility = 'hidden'; }, 600);
+            }
 
-            // Автооновлення року
-            document.getElementById('current-year').textContent = new Date().getFullYear();
+            // 2. Автооновлення року
+            var yearEl = document.getElementById('current-year');
+            if(yearEl) yearEl.textContent = new Date().getFullYear();
 
-            // Захист пошти від ботів
+            // 3. Захист пошти від ботів
             (function () {
                 var parts = ['gbud', '.', 'digital', '@', 'gmail', '.', 'com'];
                 var address = parts.join('');
@@ -335,35 +384,42 @@
                 }
             })();
 
-            // Форма Formspree
+            // 4. Форма Formspree
             var form = document.getElementById('contact-form');
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
-                var data = new FormData(form);
-                fetch(form.action, {
-                    method: 'POST',
-                    body: data,
-                    headers: { 'Accept': 'application/json' }
-                }).then(function(response) {
-                    if (response.ok) {
-                        form.style.display = 'none';
-                        document.getElementById('form-success').style.display = 'block';
-                    } else {
-                        alert("Виникла помилка при відправці. Будь ласка, спробуйте пізніше.");
-                    }
-                }).catch(function() {
-                    alert("Помилка з'єднання. Перевірте підключення до інтернету.");
+            if(form) {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    var data = new FormData(form);
+                    fetch(form.action, {
+                        method: 'POST',
+                        body: data,
+                        headers: { 'Accept': 'application/json' }
+                    }).then(function(response) {
+                        if (response.ok) {
+                            form.style.display = 'none';
+                            var successMsg = document.getElementById('form-success');
+                            if(successMsg) successMsg.style.display = 'block';
+                        } else {
+                            alert("Виникла помилка при відправці. Будь ласка, спробуйте пізніше.");
+                        }
+                    }).catch(function() {
+                        alert("Помилка з'єднання. Перевірте підключення до інтернету.");
+                    });
                 });
-            });
+            }
 
-            // Canvas Grid — з затримкою 300мс для кращого PageSpeed
+            // 5. Запуск Canvas Grid — з затримкою 300мс для кращого PageSpeed
             setTimeout(startGridAnimation, 300);
         });
 
+        // Інтерактивна сітка (Canvas) - тягнеться за курсором
         function startGridAnimation() {
             var canvas = document.getElementById('grid-canvas');
+            if(!canvas) return;
             var ctx = canvas.getContext('2d');
             var gridSize = 40, rotation = 0, w, h;
+            var mouseX = 0, mouseY = 0;
+            var targetX = 0, targetY = 0;
 
             function resize() {
                 w = canvas.width = window.innerWidth;
@@ -372,12 +428,22 @@
             window.addEventListener('resize', resize);
             resize();
 
+            window.addEventListener('mousemove', function(e) {
+                targetX = (e.clientX - w / 2) * 0.05;
+                targetY = (e.clientY - h / 2) * 0.05;
+            });
+
             function draw() {
                 ctx.clearRect(0, 0, w, h);
                 ctx.save();
-                ctx.translate(w / 2, h / 2);
+                
+                // Плавний рух до курсора
+                mouseX += (targetX - mouseX) * 0.05;
+                mouseY += (targetY - mouseY) * 0.05;
+                
+                ctx.translate(w / 2 + mouseX, h / 2 + mouseY);
                 ctx.rotate(rotation);
-                ctx.strokeStyle = 'rgba(255, 215, 0, 0.04)';
+                ctx.strokeStyle = 'rgba(255, 215, 0, 0.05)';
                 ctx.lineWidth = 1;
                 var numLines = 50;
                 for (var i = -numLines; i < numLines; i++) {
@@ -391,6 +457,34 @@
                 requestAnimationFrame(draw);
             }
             draw();
+        }
+
+        // 3D Tilt Ефект для карток (Плавний і прив'язаний до класу .card)
+        if (window.matchMedia("(pointer: fine)").matches) {
+            const cards = document.querySelectorAll('.card'); 
+            
+            cards.forEach(card => {
+                card.addEventListener('mousemove', e => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    
+                    const rotateX = ((y - centerY) / centerY) * -7; 
+                    const rotateY = ((x - centerX) / centerX) * 7;  
+                    
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+                    card.style.transition = 'transform 0.1s ease-out'; 
+                    card.style.zIndex = '10';
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+                    card.style.transition = 'transform 0.5s ease-out, box-shadow 0.5s ease';
+                    card.style.zIndex = '1';
+                });
+            });
         }
     </script>
 
