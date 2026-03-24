@@ -302,129 +302,96 @@
     </footer>
 
     <script>
-        // Захист пошти від ботів
-        (function () {
-            var parts = ['gbud', '.', 'digital', '@', 'gmail', '.', 'com'];
-            var address = parts.join('');
-            var el = document.getElementById('contact-email');
-            if (el) {
-                var a = document.createElement('a');
-                a.href = 'mai' + 'lto:' + address;
-                a.textContent = address;
-                el.appendChild(a);
-            }
-        })();
-
-        // Автооновлення року
-        document.getElementById('current-year').textContent = new Date().getFullYear();
-
-        // Обробка форми без перезавантаження (Formspree)
-        var form = document.getElementById('contact-form');
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            var data = new FormData(form);
-            fetch(form.action, {
-                method: 'POST',
-                body: data,
-                headers: { 'Accept': 'application/json' }
-            }).then(function(response) {
-                if (response.ok) {
-                    form.style.display = 'none';
-                    document.getElementById('form-success').style.display = 'block';
-                } else {
-                    alert("Виникла помилка при відправці. Будь ласка, спробуйте пізніше.");
-                }
-            }).catch(function(error) {
-                alert("Помилка з'єднання. Перевірте підключення до інтернету.");
-            });
-        });
-
-        // Intersection Observer — fade-in + скидання will-change для чіткості шрифтів (зі старої версії)
-        document.addEventListener("DOMContentLoaded", function() {
-            var faders = document.querySelectorAll('.fade-in');
-            var appearOptions = {
-                threshold: 0.15,
-                rootMargin: "0px 0px -50px 0px"
-            };
-
-            var appearOnScroll = new IntersectionObserver(function(entries, appearOnScroll) {
-                entries.forEach(function(entry) {
-                    if (!entry.isIntersecting) { return; }
+        // Intersection Observer стартує одразу — не чекає load
+        var faders = document.querySelectorAll('.fade-in');
+        var appearOptions = { threshold: 0.15, rootMargin: "0px 0px -50px 0px" };
+        var appearOnScroll = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
-                    // Скидаємо will-change після анімації для чіткості тексту
-                    setTimeout(function() {
-                        entry.target.style.willChange = 'auto';
-                    }, 1000);
+                    setTimeout(function() { entry.target.style.willChange = 'auto'; }, 1000);
                     appearOnScroll.unobserve(entry.target);
-                });
-            }, appearOptions);
+                }
+            });
+        }, appearOptions);
+        faders.forEach(function(fader) { appearOnScroll.observe(fader); });
 
-            faders.forEach(function(fader) { appearOnScroll.observe(fader); });
+        // Решта — після повного завантаження сторінки
+        window.addEventListener('load', function() {
+
+            // Автооновлення року
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+
+            // Захист пошти від ботів
+            (function () {
+                var parts = ['gbud', '.', 'digital', '@', 'gmail', '.', 'com'];
+                var address = parts.join('');
+                var el = document.getElementById('contact-email');
+                if (el) {
+                    var a = document.createElement('a');
+                    a.href = 'mai' + 'lto:' + address;
+                    a.textContent = address;
+                    el.appendChild(a);
+                }
+            })();
+
+            // Форма Formspree
+            var form = document.getElementById('contact-form');
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                var data = new FormData(form);
+                fetch(form.action, {
+                    method: 'POST',
+                    body: data,
+                    headers: { 'Accept': 'application/json' }
+                }).then(function(response) {
+                    if (response.ok) {
+                        form.style.display = 'none';
+                        document.getElementById('form-success').style.display = 'block';
+                    } else {
+                        alert("Виникла помилка при відправці. Будь ласка, спробуйте пізніше.");
+                    }
+                }).catch(function() {
+                    alert("Помилка з'єднання. Перевірте підключення до інтернету.");
+                });
+            });
+
+            // Canvas Grid — з затримкою 300мс для кращого PageSpeed
+            setTimeout(startGridAnimation, 300);
         });
 
-        // Анімований фон — Canvas Grid (з нової версії)
-        (function() {
+        function startGridAnimation() {
             var canvas = document.getElementById('grid-canvas');
             var ctx = canvas.getContext('2d');
-
-            var gridSize = 40;
-            var primaryColor = 'rgba(255, 215, 0, 0.04)';
-            var dotColor = 'rgba(255, 255, 255, 0.02)';
-
-            var rotation = 0;
-            var w, h;
+            var gridSize = 40, rotation = 0, w, h;
 
             function resize() {
                 w = canvas.width = window.innerWidth;
                 h = canvas.height = window.innerHeight;
             }
-
             window.addEventListener('resize', resize);
             resize();
 
             function draw() {
                 ctx.clearRect(0, 0, w, h);
-
                 ctx.save();
                 ctx.translate(w / 2, h / 2);
                 ctx.rotate(rotation);
-
-                var numLines = 50;
-
-                ctx.strokeStyle = primaryColor;
+                ctx.strokeStyle = 'rgba(255, 215, 0, 0.04)';
                 ctx.lineWidth = 1;
-
+                var numLines = 50;
                 for (var i = -numLines; i < numLines; i++) {
-                    ctx.beginPath();
-                    ctx.moveTo(i * gridSize, -numLines * gridSize);
-                    ctx.lineTo(i * gridSize, numLines * gridSize);
-                    ctx.stroke();
-
-                    ctx.beginPath();
-                    ctx.moveTo(-numLines * gridSize, i * gridSize);
-                    ctx.lineTo(numLines * gridSize, i * gridSize);
-                    ctx.stroke();
+                    ctx.beginPath(); ctx.moveTo(i * gridSize, -numLines * gridSize);
+                    ctx.lineTo(i * gridSize, numLines * gridSize); ctx.stroke();
+                    ctx.beginPath(); ctx.moveTo(-numLines * gridSize, i * gridSize);
+                    ctx.lineTo(numLines * gridSize, i * gridSize); ctx.stroke();
                 }
-
-                ctx.fillStyle = dotColor;
-                for (var i = -numLines; i < numLines; i++) {
-                    for (var j = -numLines; j < numLines; j++) {
-                        if (i % 2 === 0 && j % 2 === 0) {
-                            ctx.beginPath();
-                            ctx.arc(i * gridSize, j * gridSize, 1.5, 0, Math.PI * 2);
-                            ctx.fill();
-                        }
-                    }
-                }
-
                 ctx.restore();
-
                 rotation += 0.0002;
                 requestAnimationFrame(draw);
             }
-
             draw();
-        })();
+        }
     </script>
 
 </body>
