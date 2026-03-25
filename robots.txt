@@ -1,3 +1,7 @@
+User-agent: GPTBot
+Disallow: /
+User-agent: Google-Extended
+Disallow: /
 User-agent: *
 Allow: /
 Sitemap: https://digitalbud.com.ua/sitemap.xml
