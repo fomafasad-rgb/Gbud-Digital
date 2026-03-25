@@ -357,6 +357,15 @@
         }, appearOptions);
         faders.forEach(function(fader) { appearOnScroll.observe(fader); });
 
+        // Форсована поява для Opera Mobile (якщо за 1.5 сек нічого не сталось)
+        setTimeout(function() {
+            faders.forEach(function(fader) {
+                if (!fader.classList.contains('visible')) {
+                    fader.classList.add('visible');
+                }
+            });
+        }, 1500);
+
         // Основний функціонал після повного завантаження сторінки
         window.addEventListener('load', function() {
             
