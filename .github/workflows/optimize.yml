@@ -1,4 +1,4 @@
-name: Optimize Images
+name: Auto Optimize Images
 on:
   push:
     branches:
@@ -11,21 +11,22 @@ on:
 
 permissions:
   contents: write
-  pull-requests: write
 
 jobs:
-  build:
-    name: calibreapp/image-actions
+  optimize:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: Compress Images
-        uses: calibreapp/image-actions@main
+      - name: Optimize Images
+        run: |
+          # Використовуємо вбудований інструмент для стиснення JPG та PNG
+          # Якість 80%, видалення зайвих даних (метаданих)
+          find . -type f \( -name "*.jpg" -o -name "*.jpeg" \) -exec mogrify -quality 80 -strip {} +
+          find . -type f -name "*.png" -exec mogrify -strip {} +
+
+      - name: Commit and Push changes
+        uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          githubToken: ${{ secrets.GITHUB_TOKEN }}
-          jpegQuality: '80'
-          pngQuality: '80'
-          webpQuality: '80'
-          ignorePaths: 'node_modules/**'
+          commit_message: "Auto-compressed images"
