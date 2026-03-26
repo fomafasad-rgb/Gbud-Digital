@@ -24,10 +24,11 @@ jobs:
 
       - name: Optimize Images
         run: |
-          find . -type f \( -name "*.jpg" -o -name "*.jpeg" \) -exec mogrify -quality 80 -strip {} +
-          find . -type f -name "*.png" -exec mogrify -strip {} +
+          # Безпечне стиснення: висока якість (85%), м'яке зменшення розміру (1920px)
+          find . -type f \( -name "*.jpg" -o -name "*.jpeg" \) -exec mogrify -resize "1920x1920>" -quality 85 -strip {} +
+          find . -type f -name "*.png" -exec mogrify -resize "1920x1920>" -strip {} +
 
       - name: Commit and Push changes
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "Auto-compressed images"
+          commit_message: "Soft auto-compressed and resized images (HQ)"
