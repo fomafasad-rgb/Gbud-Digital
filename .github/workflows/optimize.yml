@@ -24,11 +24,10 @@ jobs:
 
       - name: Optimize Images
         run: |
-          # Стискаємо, зменшуємо до 1600px і видаляємо зайві дані
-          find . -type f \( -name "*.jpg" -o -name "*.jpeg" \) -exec mogrify -resize "1600x1600>" -quality 75 -strip {} +
-          find . -type f -name "*.png" -exec mogrify -resize "1600x1600>" -strip {} +
+          find . -type f \( -name "*.jpg" -o -name "*.jpeg" \) -exec mogrify -quality 80 -strip {} +
+          find . -type f -name "*.png" -exec mogrify -strip {} +
 
       - name: Commit and Push changes
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "Auto-compressed and resized images"
+          commit_message: "Auto-compressed images"
