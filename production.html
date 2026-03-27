@@ -51,12 +51,6 @@
         }
         .btn-back:hover { background: var(--primary); color: #000; box-shadow: var(--glow); }
 
-        .nav-links { display: flex; gap: 25px; }
-        .nav-links a { color: #fff; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; font-weight: 500; transition: 0.3s; opacity: 0.7; }
-        .nav-links a:hover { color: var(--primary); opacity: 1; text-shadow: var(--glow); }
-
-        .menu-toggle { display: none; background: transparent; border: 1px solid var(--grid); color: #fff; padding: 10px; cursor: pointer; }
-
         /* Hero */
         .hero {
             height: 100vh; display: flex; align-items: center; justify-content: center;
@@ -134,8 +128,6 @@
         footer { padding: 40px; text-align: center; border-top: 1px solid var(--grid); color: #333; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; }
 
         @media (max-width: 860px) {
-            .nav-links { display: none; }
-            .menu-toggle { display: block; }
             .hero h1 { font-size: 2.5rem; }
             .calc-box { padding: 30px 20px; }
         }
@@ -148,17 +140,8 @@
 
     <header>
         <div class="container nav">
-            <div style="display: flex; align-items: center; gap: 15px;">
-                <a href="index.html" class="logo">GBUD.DIGITAL</a>
-                <a href="index.html" class="btn-back">[ НАЗАД ]</a>
-            </div>
-            <button class="menu-toggle" id="menuBtn">☰</button>
-            <nav class="nav-links" id="navMenu">
-                <a href="#home">Terminal</a>
-                <a href="#catalog">Catalog</a>
-                <a href="#calculator">Calculator</a>
-                <a href="#contacts">Contacts</a>
-            </nav>
+            <a href="index.html" class="logo">GBUD.DIGITAL</a>
+            <a href="index.html" class="btn-back">[ НАЗАД ]</a>
         </div>
     </header>
 
@@ -343,14 +326,8 @@
 
         function sendToTelegram() {
             let msg = `🔥 Нове замовлення:%0AВиріб: ${pType.options[pType.selectedIndex].text}%0AТовщина: ${pThickness.options[pThickness.selectedIndex].text}%0AКолір: ${pColor.value}%0AРозмір: ${pLen.value}м x ${pWidth.value}мм%0AСума: ${tPrice.innerText}`;
-            // Виправлено посилання
             window.location.href = `https://t.me/digitalbud?text=${msg}`;
         }
-
-        // Mobile Menu
-        const menuBtn = document.getElementById('menuBtn');
-        const navMenu = document.getElementById('navMenu');
-        menuBtn.addEventListener('click', () => navMenu.classList.toggle('active'));
     </script>
 </body>
 </html>
