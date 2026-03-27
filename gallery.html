@@ -3,16 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Галерея робіт | DigitalBud</title>
+    <title>Архів Робіт | GBUD.DIGITAL</title>
     <meta name="robots" content="index, follow">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=JetBrains+Mono:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #FFD700;
-            --bg: #0a0a0a;
-            --card-bg: #1a1a1a;
-            --text: #ffffff;
-            --gray: #888888;
+            --primary: #FFD700; /* Золото */
+            --bg: #050505;
+            --card-bg: rgba(20, 20, 20, 0.8);
+            --accent: #FF8C00;
+            --grid: rgba(255, 215, 0, 0.05);
+            --glow: 0 0 15px rgba(255, 215, 0, 0.3);
+            --radius: 8px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            background: var(--bg);
+            color: #fff;
+            font-family: 'JetBrains Mono', monospace;
+            overflow-x: hidden;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
         }
 
         /* Кастомний скроллбар */
@@ -21,179 +34,140 @@
         ::-webkit-scrollbar-thumb { background: #333; border-radius: 5px; }
         ::-webkit-scrollbar-thumb:hover { background: var(--primary); }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body { 
-            font-family: 'Inter', sans-serif; 
-            background: var(--bg); 
-            color: var(--text); 
-            line-height: 1.6; 
-            overflow-x: hidden; 
-            -webkit-font-smoothing: antialiased; 
-            -moz-osx-font-smoothing: grayscale; 
+        /* Canvas Background */
+        #bg-canvas { position: fixed; inset: 0; z-index: -1; opacity: 0.5; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+        /* Header */
+        header {
+            padding: 20px 0;
+            background: rgba(5, 5, 5, 0.9);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--grid);
+            position: fixed; width: 100%; top: 0; z-index: 1000;
         }
+        .nav { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: 1.5rem; color: var(--primary); text-decoration: none; letter-spacing: 2px; transition: 0.3s; }
+        .logo:hover { text-shadow: var(--glow); }
+        
+        /* Кнопка повернення (Зменшена, як ти просив) */
+        .btn-back {
+            color: var(--primary); text-decoration: none; font-size: 0.65rem; text-transform: uppercase; 
+            border: 1px solid var(--primary); padding: 5px 10px; border-radius: 4px; transition: 0.3s;
+            font-weight: 700; letter-spacing: 1px;
+        }
+        .btn-back:hover { background: var(--primary); color: #000; box-shadow: var(--glow); }
 
-        header { padding: 20px; display: flex; justify-content: space-between; align-items: center; background: rgba(10,10,10,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid #333; position: sticky; top: 0; z-index: 1000; }
-        .logo { font-weight: 900; color: var(--primary); text-transform: uppercase; text-decoration: none; font-size: 1.2rem; letter-spacing: 1px; transition: opacity 0.3s; }
-        .logo:hover { opacity: 0.8; }
-        .back-link { color: var(--text); text-decoration: none; font-size: 0.9rem; border: 1px solid var(--primary); padding: 5px 15px; border-radius: 4px; transition: 0.3s; }
-        .back-link:hover { background: var(--primary); color: #000; }
+        /* Hero Секція */
+        .hero {
+            padding: 150px 0 60px; display: flex; flex-direction: column; align-items: center;
+            text-align: center; position: relative; border-bottom: 1px solid var(--grid);
+        }
+        .scanner-line {
+            position: absolute; top: 0; left: 0; width: 100%; height: 1px;
+            background: var(--primary); box-shadow: 0 0 15px var(--primary);
+            animation: scan 4s linear infinite; opacity: 0.3; pointer-events: none;
+        }
+        @keyframes scan { 0% { top: 0; } 100% { top: 100%; } }
 
-        section { padding: 60px 20px; max-width: 1200px; margin: 0 auto; }
-        h1 { font-size: 2.5rem; color: var(--primary); text-transform: uppercase; margin-bottom: 10px; text-align: center; line-height: 1.1; }
-        .section-desc { text-align: center; color: var(--gray); font-size: 1.1rem; margin-bottom: 50px; max-width: 600px; margin-left: auto; margin-right: auto; }
+        .hero h1 { font-family: 'Orbitron', sans-serif; font-size: clamp(2rem, 6vw, 4.5rem); text-transform: uppercase; color: var(--primary); margin-bottom: 10px; text-shadow: var(--glow); }
+        .hero h1 span { color: #fff; }
+        .hero p { max-width: 800px; margin: 0 auto; color: #aaa; font-size: 1.1rem; }
 
+        /* Галерея */
+        section { padding: 60px 0; }
+        
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 25px;
+            padding: 0 20px;
         }
 
         .gallery-item {
             position: relative;
             height: 300px;
-            border-radius: 8px;
+            border-radius: 4px;
             overflow: hidden; 
             background: var(--card-bg);
-            border: 1px solid #222;
+            border: 1px solid var(--grid);
             cursor: pointer;
+            transition: 0.4s;
         }
+        .gallery-item::before {
+            content: '[ REC ]'; position: absolute; top: 10px; right: 15px; z-index: 10;
+            color: red; font-size: 0.7rem; font-weight: bold; animation: blink 2s infinite;
+        }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
         .gallery-img {
-            width: 100%;
-            height: 100%;
-            background-size: cover;
-            background-position: center;
-            transition: transform 0.5s ease;
+            width: 100%; height: 100%;
+            background-size: cover; background-position: center;
+            transition: transform 0.6s ease;
+            filter: grayscale(30%) contrast(110%);
         }
 
-        .gallery-item:hover .gallery-img {
-            transform: scale(1.08);
-        }
-        .gallery-item:hover {
-            border-color: var(--primary);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
-        }
+        .gallery-item:hover .gallery-img { transform: scale(1.05); filter: grayscale(0%) contrast(100%); }
+        .gallery-item:hover { border-color: var(--primary); box-shadow: var(--glow); }
 
         .gallery-caption {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            padding: 20px;
-            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
-            color: #fff;
-            font-weight: 700;
-            transform: translateY(100%);
-            transition: transform 0.4s ease;
+            position: absolute; bottom: 0; left: 0; width: 100%;
+            padding: 20px; background: linear-gradient(to top, rgba(0,0,0,0.95), transparent);
+            color: var(--primary); font-family: 'Orbitron', sans-serif; font-size: 0.9rem; letter-spacing: 1px;
+            transform: translateY(100%); transition: transform 0.4s ease;
         }
-        .gallery-item:hover .gallery-caption {
-            transform: translateY(0);
-        }
+        .gallery-item:hover .gallery-caption { transform: translateY(0); }
 
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-            will-change: opacity, transform;
-        }
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* --- НОВІ СТИЛІ ДЛЯ ЗБІЛЬШЕННЯ ФОТО (Lightbox) --- */
+        /* --- LIGHTBOX (Модальне вікно) --- */
         .modal {
-            display: none; 
-            position: fixed;
-            z-index: 2000; /* Вище всього */
-            padding-top: 50px;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            background-color: rgba(0,0,0,0.95); /* Насичений темний фон */
-            backdrop-filter: blur(5px);
-            opacity: 0;
-            transition: opacity 0.3s ease;
+            display: none; position: fixed; z-index: 2000; padding-top: 50px;
+            left: 0; top: 0; width: 100%; height: 100%; overflow: hidden;
+            background-color: rgba(5, 5, 5, 0.95); backdrop-filter: blur(8px);
+            opacity: 0; transition: opacity 0.3s ease;
         }
-
-        .modal.show {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 1;
-        }
+        .modal.show { display: flex; align-items: center; justify-content: center; opacity: 1; }
 
         .modal-content {
-            display: block;
-            max-width: 90%;
-            max-height: 85vh;
-            border-radius: 4px;
-            border: 2px solid var(--primary); /* Золота рамка */
-            box-shadow: 0 0 30px rgba(255,215,0,0.2);
-            object-fit: contain;
-            transform: scale(0.9);
-            transition: transform 0.3s ease;
+            display: block; max-width: 90%; max-height: 85vh;
+            border-radius: 4px; border: 1px solid var(--primary); 
+            box-shadow: var(--glow); object-fit: contain;
+            transform: scale(0.9); transition: transform 0.3s ease;
         }
-
-        .modal.show .modal-content {
-            transform: scale(1);
-        }
+        .modal.show .modal-content { transform: scale(1); }
 
         .modal-caption {
-            position: absolute;
-            bottom: 20px;
-            width: 100%;
-            text-align: center;
-            color: var(--text);
-            padding: 10px;
-            font-weight: 700;
-            font-size: 1.1rem;
+            position: absolute; bottom: 20px; width: 100%; text-align: center;
+            color: var(--primary); font-family: 'Orbitron', sans-serif; letter-spacing: 2px;
+            padding: 10px; font-weight: 700; font-size: 1rem; text-shadow: var(--glow);
         }
 
         .close {
-            position: absolute;
-            top: 15px;
-            right: 35px;
-            color: var(--primary);
-            font-size: 40px;
-            font-weight: bold;
-            transition: 0.3s;
-            cursor: pointer;
-            z-index: 2001;
+            position: absolute; top: 15px; right: 35px; color: var(--primary);
+            font-size: 40px; font-weight: bold; transition: 0.3s; cursor: pointer; z-index: 2001;
         }
+        .close:hover { color: #fff; transform: scale(1.1) rotate(90deg); text-shadow: var(--glow); }
 
-        .close:hover {
-            color: #fff;
-            transform: scale(1.1) rotate(90deg);
-        }
-        /* --- КІНЕЦЬ НОВИХ СТИЛІВ --- */
-
+        /* Кнопка CTA */
         .cta-container { text-align: center; margin-top: 60px; }
         .btn-cta {
-            display: inline-block;
-            padding: 16px 35px;
-            background: transparent;
-            border: 2px solid var(--primary);
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 900;
-            border-radius: 6px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: 0.3s;
+            display: inline-block; padding: 16px 40px; border: 1px solid var(--primary);
+            color: var(--primary); font-family: 'Orbitron', sans-serif; font-weight: 900;
+            text-decoration: none; text-transform: uppercase; letter-spacing: 2px;
+            transition: 0.3s; background: transparent; cursor: pointer;
         }
-        .btn-cta:hover { background: var(--primary); color: #000; transform: translateY(-3px); box-shadow: 0 8px 25px rgba(255,215,0,0.3); }
+        .btn-cta:hover { background: var(--primary); color: #000; box-shadow: 0 0 30px var(--glow); transform: translateY(-3px); }
 
-        footer { padding: 40px 20px; text-align: center; border-top: 1px solid #333; color: var(--gray); font-size: 0.8rem; }
+        /* АНІМАЦІЯ ПОЯВИ */
+        .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; will-change: opacity, transform; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+        footer { padding: 40px; text-align: center; border-top: 1px solid var(--grid); color: #444; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; margin-top: 60px; }
 
         @media (max-width: 768px) {
-            h1 { font-size: 2rem; }
-            section { padding: 40px 15px; }
+            .hero h1 { font-size: 2.2rem; }
             .gallery-item { height: 250px; }
-            .gallery-caption { transform: translateY(0); padding: 15px; font-size: 0.9rem; }
+            .gallery-caption { transform: translateY(0); padding: 15px; font-size: 0.8rem; background: rgba(0,0,0,0.8); }
             .modal-content { max-width: 95%; max-height: 70vh; }
             .close { right: 15px; top: 10px; font-size: 35px; }
         }
@@ -201,56 +175,65 @@
 </head>
 <body>
 
+    <canvas id="bg-canvas"></canvas>
+    <div class="scanner-line"></div>
+
     <header>
-        <a href="index.html" class="logo">DigitalBud</a>
-        <a href="index.html" class="back-link">← На Головну</a>
+        <div class="container nav">
+            <a href="index.html" class="logo">GBUD.DIGITAL</a>
+            <a href="index.html" class="btn-back">[ НАЗАД ]</a>
+        </div>
     </header>
 
     <main>
+        <section class="hero">
+            <div class="container">
+                <div style="font-size: 0.7rem; color: var(--primary); margin-bottom: 15px; letter-spacing: 3px;">[ VISUAL DATA ARCHIVE ]</div>
+                <h1 class="fade-in">Архів <span>Робіт</span></h1>
+                <p class="fade-in" style="transition-delay: 0.1s;">Реалізовані об'єкти: від складних покрівельних вузлів до масштабних фасадних систем.</p>
+            </div>
+        </section>
+
         <section>
-            <h1 class="fade-in">Галерея <span>робіт</span></h1>
-            <p class="section-desc fade-in" style="transition-delay: 0.1s;">
-                Наші реалізовані об'єкти: від складних покрівельних вузлів до масштабних фасадних систем.
-            </p>
+            <div class="container">
+                <div class="gallery-grid">
+                    
+                    <div class="gallery-item fade-in" style="transition-delay: 0.1s;">
+                        <div class="gallery-img" style="background-image: url('img/1.jpg');"></div>
+                        <div class="gallery-caption">DATA: Монтаж фасадних систем</div>
+                    </div>
 
-            <div class="gallery-grid">
-                
-                <div class="gallery-item fade-in" style="transition-delay: 0.1s;">
-                    <div class="gallery-img" style="background-image: url('img/1.jpg');"></div>
-                    <div class="gallery-caption">Монтаж фасадних систем</div>
+                    <div class="gallery-item fade-in" style="transition-delay: 0.2s;">
+                        <div class="gallery-img" style="background-image: url('img/2.jpg');"></div>
+                        <div class="gallery-caption">DATA: Фальцева покрівля</div>
+                    </div>
+
+                    <div class="gallery-item fade-in" style="transition-delay: 0.3s;">
+                        <div class="gallery-img" style="background-image: url('img/3.jpg');"></div>
+                        <div class="gallery-caption">DATA: Висотні роботи СПОК</div>
+                    </div>
+                    
+                    <div class="gallery-item fade-in" style="transition-delay: 0.4s;">
+                        <div class="gallery-img" style="background-image: url('img/4.jpg');"></div>
+                        <div class="gallery-caption">DATA: Виробництво GBUD</div>
+                    </div>
+
+                    <div class="gallery-item fade-in" style="transition-delay: 0.5s;">
+                        <div class="gallery-img" style="background-image: url('img/5.jpg');"></div>
+                        <div class="gallery-caption">DATA: Комплексний монтаж</div>
+                    </div>
+
+                    <div class="gallery-item fade-in" style="transition-delay: 0.6s;">
+                        <div class="gallery-img" style="background-image: url('img/6.jpg');"></div>
+                        <div class="gallery-caption">DATA: Облаштування парапетів</div>
+                    </div>
+
                 </div>
 
-                <div class="gallery-item fade-in" style="transition-delay: 0.2s;">
-                    <div class="gallery-img" style="background-image: url('img/2.jpg');"></div>
-                    <div class="gallery-caption">Фальцева покрівля</div>
+                <div class="cta-container fade-in">
+                    <a href="index.html#contacts" class="btn-cta">Ваш об'єкт наступний?</a>
                 </div>
-
-                <div class="gallery-item fade-in" style="transition-delay: 0.3s;">
-                    <div class="gallery-img" style="background-image: url('img/3.jpg');"></div>
-                    <div class="gallery-caption">Висотні роботи СПОК</div>
-                </div>
-                
-                <div class="gallery-item fade-in" style="transition-delay: 0.4s;">
-                    <div class="gallery-img" style="background-image: url('img/4.jpg');"></div>
-                    <div class="gallery-caption">Виробництво відливів GBUD</div>
-                </div>
-
-                <div class="gallery-item fade-in" style="transition-delay: 0.5s;">
-                    <div class="gallery-img" style="background-image: url('img/5.jpg');"></div>
-                    <div class="gallery-caption">Комплексний монтаж</div>
-                </div>
-
-                <div class="gallery-item fade-in" style="transition-delay: 0.6s;">
-                    <div class="gallery-img" style="background-image: url('img/6.jpg');"></div>
-                    <div class="gallery-caption">Облаштування парапетів</div>
-                </div>
-
             </div>
-
-            <div class="cta-container fade-in">
-                <a href="index.html#contacts" class="btn-cta">Ваш об'єкт наступний?</a>
-            </div>
-
         </section>
     </main>
 
@@ -259,44 +242,75 @@
         <img class="modal-content" id="modalImg">
         <div id="modalCaption" class="modal-caption"></div>
     </div>
+
     <footer>
-        <p>© <span id="year"></span> gbud.digital | Реальні технології для реальних об'єктів</p>
+        &copy; <span id="year"></span> GBUD.DIGITAL | VISUAL RECORDS | ALL RIGHTS RESERVED
     </footer>
 
     <script>
+        // Автооновлення року
         document.getElementById('year').textContent = new Date().getFullYear();
 
-        // --- ЛОГІКА ЗБІЛЬШЕННЯ ФОТО (Lightbox) ---
+        // Background Grid Animation (Сітка на фоні)
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+        let width, height, dots = [];
+
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        for(let i=0; i<80; i++) dots.push({ x: Math.random()*width, y: Math.random()*height, vx: (Math.random()-0.5)*0.3, vy: (Math.random()-0.5)*0.3 });
+
+        function draw() {
+            ctx.clearRect(0,0,width,height);
+            ctx.fillStyle = 'rgba(255, 215, 0, 0.3)';
+            ctx.strokeStyle = 'rgba(255, 215, 0, 0.05)';
+            dots.forEach(d => {
+                d.x += d.vx; d.y += d.vy;
+                if(d.x<0 || d.x>width) d.vx*=-1;
+                if(d.y<0 || d.y>height) d.vy*=-1;
+                ctx.beginPath(); ctx.arc(d.x, d.y, 1, 0, Math.PI*2); ctx.fill();
+            });
+            for(let i=0; i<dots.length; i++) {
+                for(let j=i+1; j<dots.length; j++) {
+                    let dist = Math.hypot(dots[i].x - dots[j].x, dots[i].y - dots[j].y);
+                    if(dist < 150) { ctx.beginPath(); ctx.moveTo(dots[i].x, dots[i].y); ctx.lineTo(dots[j].x, dots[j].y); ctx.stroke(); }
+                }
+            }
+            requestAnimationFrame(draw);
+        }
+        draw();
+
+        // --- ЛОГІКА ЗБІЛЬШЕННЯ ФОТО (Покращена) ---
         const modal = document.getElementById("galleryModal");
         const modalImg = document.getElementById("modalImg");
         const captionText = document.getElementById("modalCaption");
         const galleryItems = document.querySelectorAll('.gallery-item');
 
-        // Функція відкриття
         galleryItems.forEach(item => {
             item.addEventListener('click', function() {
-                // Отримуємо URL з background-image
+                // Надійне витягування URL картинки
                 const bgImg = this.querySelector('.gallery-img').style.backgroundImage;
-                // Очищаємо шлях від url("...")
-                const imgSrc = bgImg.slice(5, -2);
+                const imgSrc = bgImg.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
                 const caption = this.querySelector('.gallery-caption').textContent;
 
                 modal.classList.add('show');
                 modalImg.src = imgSrc;
                 captionText.textContent = caption;
-                document.body.style.overflow = 'hidden'; // Заборона скролу фону
+                document.body.style.overflow = 'hidden';
             });
         });
 
-        // Функція закриття
         function closeModal() {
             modal.classList.remove('show');
-            document.body.style.overflow = ''; // Повернення скролу
-            // Невелика затримка перед очищенням src, щоб не було "блимання" при анімації
+            document.body.style.overflow = '';
             setTimeout(() => { modalImg.src = ''; }, 300);
         }
 
-        // Закриття на хрестик, на фон або кнопку Esc
         modal.addEventListener('click', function(e) {
             if (e.target.className === "close" || e.target.id === "galleryModal") {
                 closeModal();
@@ -308,7 +322,6 @@
                 closeModal();
             }
         });
-        // --- КІНЕЦЬ ЛОГІКИ ---
 
         // Скрипт плавної появи
         document.addEventListener("DOMContentLoaded", function() {
@@ -327,6 +340,5 @@
             faders.forEach(function(fader) { appearOnScroll.observe(fader); });
         });
     </script>
-
 </body>
 </html>
