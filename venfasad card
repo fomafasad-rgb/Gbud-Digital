@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DigitalBud — Вентильовані фасади, покрівля, цех</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    body { font-family: 'Inter', sans-serif; }
+    .hero-bg { background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.8)), url('https://picsum.photos/id/1015/2000/1200') center/cover; }
+    .neon { text-shadow: 0 0 20px #00f0ff; }
+    .card-hover { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+    .card-hover:hover { transform: translateY(-12px) scale(1.03); box-shadow: 0 25px 50px -12px rgb(0 240 255); }
+    .animate-in { animation: fadeInUp 0.8s ease forwards; }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+  </style>
+</head>
+<body class="bg-zinc-950 text-white overflow-x-hidden">
+
+  <!-- HERO -->
+  <section class="hero-bg h-screen flex items-center relative">
+    <div class="max-w-7xl mx-auto px-6 text-center">
+      <h1 class="text-6xl md:text-7xl font-bold neon mb-4">DigitalBud</h1>
+      <p class="text-4xl md:text-5xl font-semibold mb-6">Вентильовані фасади • Покрівля • Власний цех</p>
+      <p class="text-2xl text-zinc-300 mb-10">15+ років. Швидко. Надійно. Технологічно.</p>
+      <div class="flex flex-wrap gap-4 justify-center">
+        <a href="#calc" class="px-10 py-5 bg-cyan-500 hover:bg-cyan-400 text-black font-bold text-xl rounded-2xl flex items-center gap-3 transition-all neon">Розрахувати фасад за 30 сек <i class="fas fa-arrow-right"></i></a>
+        <a href="https://t.me/" target="_blank" class="px-10 py-5 border-2 border-cyan-500 hover:bg-cyan-500/10 text-cyan-400 font-bold text-xl rounded-2xl flex items-center gap-3">Написати в Telegram</a>
+      </div>
+    </div>
+    <div class="absolute bottom-10 left-1/2 animate-bounce text-cyan-400 text-4xl">↓</div>
+  </section>
+
+  <!-- ФАСАДИ - ОСНОВНА СЕКЦІЯ -->
+  <section id="facades" class="py-24 bg-zinc-900">
+    <div class="max-w-7xl mx-auto px-6">
+      <h2 class="text-5xl font-bold text-center mb-6">Вентильовані фасади (НВФ СПОК)</h2>
+      <p class="text-center text-xl text-zinc-400 mb-16 max-w-2xl mx-auto">Індивідуальні рішення під будь-який проєкт. Власне виробництво — від 7 днів.</p>
+      
+      <div class="grid md:grid-cols-3 gap-8">
+        <!-- Card 1 -->
+        <div class="card-hover bg-zinc-800 p-8 rounded-3xl">
+          <div class="h-64 bg-[url('https://picsum.photos/id/1016/800/600')] bg-cover rounded-2xl mb-6"></div>
+          <h3 class="text-2xl font-semibold mb-2">Алюмінієві композитні панелі</h3>
+          <p class="text-zinc-400">Від 850 грн/м². Ідеально для висотних будівель.</p>
+        </div>
+        <!-- Card 2 -->
+        <div class="card-hover bg-zinc-800 p-8 rounded-3xl">
+          <div class="h-64 bg-[url('https://picsum.photos/id/201/800/600')] bg-cover rounded-2xl mb-6"></div>
+          <h3 class="text-2xl font-semibold mb-2">Керамогранітна плитка</h3>
+          <p class="text-zinc-400">Від 1200 грн/м². Максимальна міцність та дизайн.</p>
+        </div>
+        <!-- Card 3 -->
+        <div class="card-hover bg-zinc-800 p-8 rounded-3xl">
+          <div class="h-64 bg-[url('https://picsum.photos/id/301/800/600')] bg-cover rounded-2xl mb-6"></div>
+          <h3 class="text-2xl font-semibold mb-2">Металокасети + перфорація</h3>
+          <p class="text-zinc-400">Від 650 грн/м². Сучасний вигляд + вентиляція.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- КАЛЬКУЛЯТОР -->
+  <section id="calc" class="py-24 bg-black">
+    <div class="max-w-4xl mx-auto px-6">
+      <h2 class="text-4xl font-bold text-center mb-12">Розрахуйте вартість фасаду за 30 секунд</h2>
+      <div class="bg-zinc-900 p-10 rounded-3xl">
+        <div class="grid grid-cols-2 gap-8">
+          <div>
+            <label class="block text-sm mb-2">Площа фасаду, м²</label>
+            <input id="area" type="range" min="50" max="2000" value="300" class="w-full accent-cyan-400">
+            <span id="areaVal" class="text-3xl font-bold text-cyan-400">300 м²</span>
+          </div>
+          <div>
+            <label class="block text-sm mb-2">Тип матеріалу</label>
+            <select id="material" class="w-full bg-zinc-800 text-white p-4 rounded-2xl text-lg">
+              <option value="850">Алюміній композит (850 грн/м²)</option>
+              <option value="1200">Керамограніт (1200 грн/м²)</option>
+              <option value="650">Металокасети (650 грн/м²)</option>
+            </select>
+          </div>
+        </div>
+        <div class="mt-10 text-center">
+          <div class="text-7xl font-bold text-cyan-400" id="total">255 000 грн</div>
+          <p class="text-zinc-400 mt-2">з урахуванням монтажу та матеріалів</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ГАЛЕРЕЯ -->
+  <section class="py-24 bg-zinc-900">
+    <div class="max-w-7xl mx-auto px-6">
+      <h2 class="text-5xl font-bold text-center mb-16">Наші роботи — фасади</h2>
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
+        <div class="overflow-hidden rounded-3xl"><img src="https://picsum.photos/id/1015/800/600" class="w-full hover:scale-110 transition-transform duration-500"></div>
+        <div class="overflow-hidden rounded-3xl"><img src="https://picsum.photos/id/201/800/600" class="w-full hover:scale-110 transition-transform duration-500"></div>
+        <div class="overflow-hidden rounded-3xl"><img src="https://picsum.photos/id/301/800/600" class="w-full hover:scale-110 transition-transform duration-500"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-black py-16">
+    <div class="max-w-7xl mx-auto px-6 text-center">
+      <p class="text-4xl font-bold neon mb-6">DigitalBud</p>
+      <p class="text-zinc-400">Київ та область • 15+ років • 200+ об’єктів</p>
+      <div class="flex justify-center gap-8 mt-10 text-3xl">
+        <a href="#" class="hover:text-cyan-400">📞</a>
+        <a href="#" class="hover:text-cyan-400">✉️</a>
+        <a href="https://t.me/" class="hover:text-cyan-400">Telegram</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Live calculator
+    const areaSlider = document.getElementById('area');
+    const areaVal = document.getElementById('areaVal');
+    const materialSelect = document.getElementById('material');
+    const totalEl = document.getElementById('total');
+
+    function calculate() {
+      const area = parseFloat(areaSlider.value);
+      const pricePerM2 = parseFloat(materialSelect.value);
+      const total = Math.round(area * pricePerM2);
+      areaVal.textContent = area + ' м²';
+      totalEl.textContent = total.toLocaleString('uk-UA') + ' грн';
+    }
+
+    areaSlider.addEventListener('input', calculate);
+    materialSelect.addEventListener('change', calculate);
+    calculate();
+  </script>
+</body>
+</html>
